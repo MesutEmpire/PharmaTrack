@@ -1,0 +1,69 @@
+import {ActionFunctionArgs, createBrowserRouter, Navigate, redirect} from "react-router-dom";
+import HomeLayout from "../layouts/HomeLayout";
+import ErrorComponent from "../components/ErrorComponent";
+import Dashboard from "../components/Dashboard";
+import Product from "../components/Product";
+import Suppliers from "../components/Suppliers";
+import Orders from "../components/Orders";
+import Sales from "../components/Sales";
+import Users from "../components/Users";
+import LandingLayout from "../layouts/LandingLayout";
+import Login from "../components/Login";
+import SignUp from "../components/SignUp";
+
+const router = createBrowserRouter([
+    {
+        path:'/',
+        element: <LandingLayout/>,
+        errorElement:<ErrorComponent/>,
+    },
+    {
+        path:'/login',
+        element: <Login/>,
+        // action:()=>{
+        //     return <Navigate to={'/admin'}/>
+        // }
+    },{
+        path:'/error',
+        element: <ErrorComponent/>,
+    },
+    {
+        path:'/sign_up',
+        element: <SignUp/>,
+    },
+
+    {
+        path:'/admin',
+        element:<HomeLayout/>,
+        // element:localStorage.getItem('currentUser') ? <HomeLayout/>:<Navigate to={'/login'}/>,
+        children: [
+            {
+                index:true,
+                element: <Dashboard/>
+            },{
+                path:'/admin/products',
+                element: <Product/>
+            },
+            {
+                path:'/admin/suppliers',
+                element: <Suppliers/>
+            },
+            {
+                path:'/admin/orders',
+                element: <Orders/>
+            },
+            {
+                path:'/admin/sales',
+                element: <Sales/>
+            },
+            {
+                path:'/admin/users',
+                element: <Users/>
+            },
+
+        ]
+    }
+  ])
+
+
+export default router
