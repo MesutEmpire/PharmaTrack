@@ -1,8 +1,5 @@
-
-import {Outlet} from "react-router-dom";
-const SupplierLayout = ()=>{
-    return(
-        <Outlet/>
-    )
-}
-export default SupplierLayout
+import { Outlet } from "react-router-dom";
+const SupplierLayout = () => {
+  return <Outlet />;
+};
+export default SupplierLayout;

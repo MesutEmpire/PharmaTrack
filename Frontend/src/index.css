@@ -4,28 +4,28 @@
 @tailwind utilities;
 
 @layer components {
-    /*.input_design {*/
-    /*    @apply px-2.5 py-2.5 w-full text-sm text-gray-900 rounded-lg border border-[[#71318c]] appearance-none focus:outline-none focus:ring-0 focus:border-[#71318c];*/
-    /*}*/
-    .input_design {
-        @apply block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border border-[#71318c] appearance-none focus:outline-none focus:ring-0 focus:border-[#71318c]
-    }
-    .label_design{
-        @apply absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 ;
-    }
-    .nav {
-        @apply flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 hover:bg-white hover:border-r-4 hover:border-[#71318c] active:bg-blue-100 text-white hover:text-black;
-    }
-    .button {
-        @apply rounded-md bg-[#482059] font-semibold shadow-sm  hover:bg-[#71318c] focus:ring-4 focus:outline-none focus:ring-[#71318c]  text-white text-sm lg:text-base w-full sm:w-auto px-5 py-2.5 text-center
-    }
-    .error_container {
-        @apply px-2.5 py-2.5 text-base text-red-600 bg-red-50 rounded-lg border border-red-600 appearance-none focus:outline-none focus:ring-0 focus:border-red-600;
-    }
-    .search_bar {
-        @apply bg-gray-50 border border-[#71318c] text-gray-900 text-sm rounded-lg  block w-80 pl-10 p-2.5 appearance-none focus:outline-none focus:ring-0 focus:border-[#71318c];
-    }
-    .round_btn {
-        @apply inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-primary text-white hover:bg-hover_primary hover:text-slate-100 active:bg-hover_primary active:text-slate-300 focus-visible:outline-slate-900
-    }
+  /*.input_design {*/
+  /*    @apply px-2.5 py-2.5 w-full text-sm text-gray-900 rounded-lg border border-[[#71318c]] appearance-none focus:outline-none focus:ring-0 focus:border-[#71318c];*/
+  /*}*/
+  .input_design {
+    @apply block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border border-[#71318c] appearance-none focus:outline-none focus:ring-0 focus:border-[#71318c];
+  }
+  .label_design {
+    @apply absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2;
+  }
+  .nav {
+    @apply flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 hover:bg-white hover:border-r-4 hover:border-[#71318c] active:bg-blue-100 text-white hover:text-black;
+  }
+  .button {
+    @apply rounded-md bg-[#482059] font-semibold shadow-sm  hover:bg-[#71318c] focus:ring-4 focus:outline-none focus:ring-[#71318c]  text-white text-sm lg:text-base w-full sm:w-auto px-5 py-2.5 text-center;
+  }
+  .error_container {
+    @apply px-2.5 py-2.5 text-base text-red-600 bg-red-50 rounded-lg border border-red-600 appearance-none focus:outline-none focus:ring-0 focus:border-red-600;
+  }
+  .search_bar {
+    @apply bg-gray-50 border border-[#71318c] text-gray-900 text-sm rounded-lg  block w-80 pl-10 p-2.5 appearance-none focus:outline-none focus:ring-0 focus:border-[#71318c];
+  }
+  .round_btn {
+    @apply inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-primary text-white hover:bg-hover_primary hover:text-slate-100 active:bg-hover_primary active:text-slate-300 focus-visible:outline-slate-900;
+  }
 }
