@@ -1,18 +1,19 @@
-import { useState } from "react";
-// import { IOwner } from "../intetfaces/Interfaces";
 import ErrorComponent from "./ErrorComponent";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectSupplier, setSearchedSupplier } from "../stores/supplierSlice";
-import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import SearchBar from "./SearchBar";
-import {setSearchedUser} from "../stores/userSlice";
+import {Link} from "react-router-dom";
+import IconAddSupplier from "../icons/IconAddSupplier";
 const Suppliers = ()=>{
     const { suppliers, error } = useSelector(selectSupplier);
-    const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
+
     return (
             <div>
                 <h2>Suppliers</h2>
+                <div className='flex justify-between items-center mr-12'>
                 <SearchBar name={'Suppliers'} search={setSearchedSupplier}/>
+                    <Link to='/admin/suppliers/addNewSupplier'><IconAddSupplier/></Link>
+                </div>
                 {error ? (
                     <ErrorComponent fetchError={error} />
                 ) : (

@@ -1,6 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-import { selectProduct, fetchAllProducts } from "../stores/productSlice";
-import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
+import { selectProduct } from "../stores/productSlice";
 import {selectOrder} from "../stores/orderSlice";
 import {selectSales} from "../stores/saleSlice";
 import {selectSupplier} from "../stores/supplierSlice";
@@ -11,7 +10,6 @@ const Dashboard = ()=>{
     const { orders } = useSelector(selectOrder);
     const { sales } = useSelector(selectSales);
     const { suppliers } = useSelector(selectSupplier);
-    const colors = ["red","gray","blue","purple"]
     const datas = [{
         name : "Products",
         id:0,
@@ -40,12 +38,6 @@ const Dashboard = ()=>{
 
         }]
 
-   datas.map((data:any)=>{
-
-        console.log(data)
-    })
-console.log(datas.length)
-    console.log(typeof datas)
     return (
 
                    <div className="flex items-start justify-center min-h-screen pt-5 min-w-screen">

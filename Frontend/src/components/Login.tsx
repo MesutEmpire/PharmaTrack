@@ -1,22 +1,16 @@
-import {Link, Navigate, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useSelector,useDispatch} from "react-redux";
-import {setLoginForm, selectCurrentUser, loginUser, selectLoginFormData, setErrorLogin,selectErrorPost,setCurrentUser} from "../stores/userAuthSlice";
+import {setLoginForm, selectLoginFormData, setErrorLogin,selectErrorPost,setCurrentUser} from "../stores/userAuthSlice";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import {FormEvent} from "react";
 import ErrorComponent from "./ErrorComponent";
 
 const Login = ()=>{
-    const currentUser = useSelector(selectCurrentUser);
     const {loginError} = useSelector(selectErrorPost)
     const loginData = useSelector(selectLoginFormData)
     const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
     const navigate = useNavigate()
-    const submitData = (event: FormEvent) => {
-        event.preventDefault();
-        // Send the POST request
-        dispatch(loginUser());
-        // navigate('/')
-    };
+
     const postLoginData = (event: FormEvent) => {
         event.preventDefault();
         fetch(
@@ -29,7 +23,6 @@ const Login = ()=>{
             }
         )
             .then(async (res:any)=>{
-                console.log(res)
                 if(res.status !== 200) {
                     const data = await res.json()
                     if (res.status == 401) {
@@ -41,19 +34,14 @@ const Login = ()=>{
 
             })
             .then((data:any)=> {
-                console.log(data)
-                console.log(document.cookie)
             localStorage.setItem("currentUser",JSON.stringify(data))
                 dispatch(setCurrentUser(data))
                     return navigate('/admin')
             })
             .catch((error:any)=>{
-                console.log(error)
-                console.log(error.message)
                 dispatch(setErrorLogin(error.message))
             })
     };
-    const logout = ()=>{}
     return (
         <div className="bg-white">
             <div className="relative isolate px-6 pt-14 lg:px-8">

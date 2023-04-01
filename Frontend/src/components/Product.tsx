@@ -1,11 +1,9 @@
-import {useEffect, useState} from "react";
-// import { IOwner } from "../intetfaces/Interfaces";
 import ErrorComponent from "./ErrorComponent";
-import { useSelector, useDispatch } from "react-redux";
-import {selectProduct, fetchAllProducts, setProducts, setSearchedProduct} from "../stores/productSlice";
-import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
-import {useLoaderData} from "react-router-dom";
+import { useSelector } from "react-redux";
+import {selectProduct, setSearchedProduct} from "../stores/productSlice";
+import {Link} from "react-router-dom";
 import SearchBar from "./SearchBar";
+import IconAddProduct from "../icons/IconAddProduct";
 
 
 
@@ -13,11 +11,13 @@ import SearchBar from "./SearchBar";
 const Product = ()=>{
 
     const {  products,error } = useSelector(selectProduct);
-console.log(error)
     return (
               <div>
                 <h2>Products</h2>
-                  <SearchBar name={'Products'} search={setSearchedProduct}/>
+                 <div className='flex justify-between items-center mr-12'>
+                     <SearchBar name={'Products'} search={setSearchedProduct}/>
+                     <Link to='/admin/products/addNewProduct'><IconAddProduct/></Link>
+                 </div>
                 {error ? (
                     <ErrorComponent fetchError={error} />
                 ) : (
@@ -80,7 +80,7 @@ console.log(error)
                                                 </td>
                                                 <td className="px-6 py-4">
                                                     {new Date(product.restocking_date).toLocaleDateString()}</td>
-                                                <td className="px-6 py-4">{product.supplier_id}</td>
+                                                <td className="px-6 py-4">{product.supplier_name}</td>
                                             </tr>
                                         );
                                     })}

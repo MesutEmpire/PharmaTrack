@@ -49,7 +49,7 @@ const login = async (req: Request, res: Response) => {
 
 
 const sign_up = async (req: Request, res: Response) => {
-  const {email: username, password} = req.body;
+  const {email: username, password,pharmacy:pharmacy_id} = req.body;
 
   const newPassword = await encryptPass(password)
 
@@ -62,9 +62,9 @@ const sign_up = async (req: Request, res: Response) => {
       //INSERT OWNER
       db.promise()
           .query({
-            sql: `INSERT INTO user (username, password)
-                  VALUES (?, ?)`,
-            values: [username, newPassword],
+            sql: `INSERT INTO user (username, password,pharmacy_id)
+                  VALUES (?, ?,?)`,
+            values: [username, newPassword,pharmacy_id],
           })
           .then((result: any) => {
             console.log(result)

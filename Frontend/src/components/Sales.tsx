@@ -1,13 +1,10 @@
-import { useState } from "react";
-// import { IOwner } from "../intetfaces/Interfaces";
+
 import ErrorComponent from "./ErrorComponent";
-import { useSelector, useDispatch } from "react-redux";
-import { selectSales, fetchAllSales } from "../stores/saleSlice";
-import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
+import { selectSales } from "../stores/saleSlice";
 import SearchBar from "./SearchBar";
 const Sales = ()=>{
     const { sales, error } = useSelector(selectSales);
-    const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
 
           return (
             <div>
@@ -37,7 +34,9 @@ const Sales = ()=>{
                                         <th scope="col" className="px-6 py-3">
                                             Selling Price
                                         </th>
-
+                                        <th scope="col" className="px-6 py-3">
+                                            Profit
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -53,12 +52,13 @@ const Sales = ()=>{
                                                 >
                                                     {sale.sale_id}
                                                 </th>
-                                                <td className="px-6 py-4">{sale.product_id}</td>
+                                                <td className="px-6 py-4">{sale.product_name}</td>
                                                 <td className="px-6 py-4">
                                                     {new Date(sale.sale_date).toLocaleDateString()}
                                                 </td>
-                                                <td className="px-6 py-4">{sale.quantity}</td>
+                                                <td className="px-6 py-4">{sale.sale_quantity}</td>
                                                 <td className="px-6 py-4">{sale.selling_price}</td>
+                                                <td className="px-6 py-4">{sale.profit_margin}</td>
                                             </tr>
                                         );
                                     })}

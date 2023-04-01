@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./mainStore";
-import {useDispatch} from "react-redux";
 
 export const fetchAllProducts = createAsyncThunk(
     "product/fetchAllProducts",
@@ -20,6 +19,8 @@ const productSlice = createSlice({
     name: "product",
     initialState: {
         products: [],
+        productForm: {},
+        errorPost:null,
         searchedProduct :null,
         foundSearchProducts:[],
         error: null as unknown,
@@ -31,6 +32,13 @@ const productSlice = createSlice({
             state.products = action.payload
            setExpiredDate()
         },
+        setProductsForm: (state, action) => {
+            const {pharmacy_id} = JSON.parse(localStorage.getItem('currentUser'))
+            state.productForm = { ...state.productForm, ...action.payload,pharmacy_id:pharmacy_id};
+        },
+        setErrorPostProduct:(state, action)=>{
+            state.errorPost = action.payload
+        },
         setSearchedProduct:(state, action)=>{
             state.searchedProduct = action.payload
             if(state.searchedProduct != null ){
@@ -40,7 +48,7 @@ const productSlice = createSlice({
         setErrorProducts:(state, action)=>{
             state.error = action.payload
         },
-        setExpiredDate: (state, action) => {
+        setExpiredDate: (state) => {
             const today = new Date();
             const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
             state.expiringProducts = state.products.filter((product) => {
@@ -64,7 +72,7 @@ const productSlice = createSlice({
 });
 
 export const productReducer = productSlice.reducer;
-export const {setProducts,setErrorProducts,setSearchedProduct,setExpiredDate} = productSlice.actions
+export const {setProductsForm,setErrorPostProduct,setProducts,setErrorProducts,setSearchedProduct,setExpiredDate} = productSlice.actions
 export const selectProduct = (state: RootState) => {
     if(state.product.searchedProduct){
         return {products : state.product.foundSearchProducts,
@@ -74,3 +82,7 @@ export const selectProduct = (state: RootState) => {
 };
 export const selectNoProducts = (state: RootState) => state.product.products.length;
 
+export const selectErrorPostProduct = (state: RootState) =>
+    state.product.errorPost;
+export const selectProductFormData = (state: RootState) =>
+    state.product.productForm;

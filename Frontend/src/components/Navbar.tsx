@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutCurrentUser, selectCurrentUser} from "../stores/userAuthSlice";
 import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
@@ -10,6 +10,7 @@ import React from "react";
 const Navbar = ()=>{
     const currentUser = useSelector(selectCurrentUser)
     const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch()
+    const navigate = useNavigate()
 
     const logout = ()=>{
         fetch("http://localhost:3210/api/userAuth/logout")
@@ -22,9 +23,11 @@ const Navbar = ()=>{
                     throw Error(data)
                 }
                return dispatch(logoutCurrentUser())
-            })
+            }).then(()=>{
+                return navigate('/')
+        })
             .catch((err:any)=>{
-console.log(err.message)
+             console.log(err.message)
             })
 
     }
@@ -34,7 +37,7 @@ console.log(err.message)
                     <div className="container flex flex-nowrap justify-between items-center mx-auto">
                         <div className='flex justify-evenly items-center gap-x-6'>
                             <Link to="/" className="flex items-center">
-                                <img src="logo2.png" className="mr-3 h-14 sm:h-16"  alt="Pharma Logo"/>
+                                <img src="../../public/logo2.png" className="mr-3 h-14 sm:h-16"  alt="Pharma Logo"/>
                                 <span className="self-center text-3xl font-semibold whitespace-nowrap text-slate-900 dark:text-white">Pharma Track</span>
                             </Link>
 

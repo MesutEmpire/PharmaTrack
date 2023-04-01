@@ -1,22 +1,22 @@
-import { useState } from "react";
-// import { IOwner } from "../intetfaces/Interfaces";
 import ErrorComponent from "./ErrorComponent";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectOrder, setSearchedOrder } from "../stores/orderSlice";
-import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import SearchBar from "./SearchBar";
-import {setSearchedProduct} from "../stores/productSlice";
+import {Link} from "react-router-dom";
+import IconAddOrder from "../icons/IconAddOrder";
 const Orders = ()=>{
 
     const { orders, error } = useSelector(selectOrder);
-    const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
 
     return (
 
 
             <div>
                 <h2>Order</h2>
+                <div className='flex justify-between items-center mr-12'>
                 <SearchBar name={'Order'} search={setSearchedOrder}/>
+                    <Link to={'/'}><IconAddOrder/></Link>
+                </div>
                 {error ? (
                     <ErrorComponent fetchError={error} />
                 ) : (
@@ -64,10 +64,10 @@ const Orders = ()=>{
                                                     {order.purchaseOrder_id}
                                                 </th>
                                                 <td className="px-6 py-4">
-                                                    {order.product_id}
+                                                    {order.product_name}
                                                 </td>
-                                                <td className="px-6 py-4">{order.supplier_id}</td>
-                                                <td className="px-6 py-4">{order.quantity}</td>
+                                                <td className="px-6 py-4">{order.supplier_name}</td>
+                                                <td className="px-6 py-4">{order.order_quantity}</td>
                                                 <td className="px-6 py-4">
                                                     {new Date(order.order_date).toLocaleDateString()}
                                                 </td>

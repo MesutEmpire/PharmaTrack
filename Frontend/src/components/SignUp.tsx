@@ -1,38 +1,24 @@
-import {Link, redirect,useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useSelector,useDispatch} from "react-redux";
 import {
     selectErrorPost,
     setErrorSignUp,
-    selectCurrentUser,
-    setSignUpForm,
-    createNewUser,
-    selectSignUpFormData
+    setSignUpForm, selectSignUpFormData
 } from "../stores/userAuthSlice";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import {FormEvent} from "react";
 import ErrorComponent from "./ErrorComponent";
-import iconDashboard from "../icons/IconDashboard";
-import router from "../router/Route";
+
 
 
 const SignUp = ()=>{
-    const currentUser = useSelector(selectCurrentUser);
     const signUpData = useSelector(selectSignUpFormData)
     const {signUpError} = useSelector(selectErrorPost)
     const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
     const navigate = useNavigate()
 
-    const submitData = (event: FormEvent) => {
-        event.preventDefault();
-        // Send the POST request
-        dispatch(createNewUser());
-    };
-
-    console.log(signUpError)
-
     const postData = (event: FormEvent)=>{
         event.preventDefault();
-        console.log(signUpData)
        fetch(
             "http://localhost:3210/api/userAuth/sign_up",
             {
@@ -46,14 +32,13 @@ const SignUp = ()=>{
            .then((res:Response)=>{
 
                if(res.status !== 200) {
-                   if (res.status == 401) throw Error('Unathorized Access')
+                   if (res.status == 401) throw Error('Unauthorized Access')
                    throw Error('Failed to Register')
                }
                res.json()
 
-           }).then(()=> navigate('/admin'))
+           }).then(()=> navigate('/login'))
            .catch((error:any)=>{
-               console.log(error.message)
                dispatch(setErrorSignUp(error.message))
            })
     }
@@ -128,8 +113,16 @@ const SignUp = ()=>{
                         <label htmlFor="confirm_password"
 
                                className="label_design peer-focus:px-2 peer-focus:text-[#71318c] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                        >Confirm
-                            Password</label>
+                        >Confirm Password</label>
+                    </div>
+                    <div className="relative mb-6">
+                            <input type="number" name="pharmacy" id="pharmacy"
+
+                                   className="input_design peer"  placeholder=" " required />
+                            <label htmlFor="pharmacy"
+
+                                   className="label_design peer-focus:px-2 peer-focus:text-[#71318c] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                            >Pharmacy ID</label>
                     </div>
                     <button type="submit"
                            className={'button px-36'}>Sign  Up</button>

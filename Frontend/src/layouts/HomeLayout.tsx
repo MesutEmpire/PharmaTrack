@@ -1,26 +1,19 @@
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import {useSelector,useDispatch} from "react-redux";
-import {authUser,selectAuth,selectCurrentUser,loginUser} from "../stores/userAuthSlice";
+import {selectCurrentUser} from "../stores/userAuthSlice";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import {useEffect} from "react";
 import {fetchData} from "../utils/data";
 const HomeLayout = ()=>{
-    // const navigate = useNavigate();
-    // const data = localStorage.getItem("auth")
-    // useEffect(()=>{
-    //
-    //   if ("true" !== data){
-    //       navigate("/login")
-    //   }
-    // },[data])
+    const {pharmacy_id} = useSelector(selectCurrentUser)
 
     const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
 
 
     const productLoader = ()=>{
-        fetchData.map((storeData:any,key:any)=>{
-            fetch(`http://localhost:3210/api/${storeData.tag}`,{
+        fetchData.map((storeData:any)=>{
+            fetch(`http://localhost:3210/api/${storeData.tag}/${pharmacy_id}`,{
                 method:'GET',
                 headers: {'Content-Type':'application/json'},
                 credentials: 'include',
@@ -36,11 +29,9 @@ const HomeLayout = ()=>{
                     return res.json()
                 })
                 .then((data:any)=> {
-                    console.log(data)
                     dispatch(storeData.store(data))
                 })
                 .catch((error:any)=> {
-                    console.log(error.message)
                     dispatch(storeData.error(error.message))
                 })
         })
@@ -48,7 +39,7 @@ const HomeLayout = ()=>{
     }
     useEffect(()=>{
         productLoader()
-    },[])
+    },[pharmacy_id])
 
     return(<div>
             <Navbar />

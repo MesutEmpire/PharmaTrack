@@ -1,12 +1,9 @@
-// import { IOwner } from "../intetfaces/Interfaces";
 import ErrorComponent from "./ErrorComponent";
-import { useSelector,useDispatch} from "react-redux";
+import { useSelector} from "react-redux";
 import {selectUser,setSearchedUser} from "../stores/userSlice";
-import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import SearchBar from "./SearchBar";
 const Users = ()=>{
 const {users,error} = useSelector(selectUser)
-    const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
 
 
     return (

@@ -1,4 +1,4 @@
-import {ActionFunctionArgs, createBrowserRouter, Navigate, redirect} from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
 import HomeLayout from "../layouts/HomeLayout";
 import ErrorComponent from "../components/ErrorComponent";
 import Dashboard from "../components/Dashboard";
@@ -10,6 +10,10 @@ import Users from "../components/Users";
 import LandingLayout from "../layouts/LandingLayout";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
+import AddSupplier from "../components/AddSupplier";
+import SupplierLayout from "../layouts/SupplierLayout";
+import AddProduct from "../components/addProduct";
+import ProductLayout from "../layouts/ProductLayout";
 
 const router = createBrowserRouter([
     {
@@ -42,11 +46,31 @@ const router = createBrowserRouter([
                 element: <Dashboard/>
             },{
                 path:'/admin/products',
-                element: <Product/>
+                element: <ProductLayout/>,
+                children:[
+                    {
+                        index:true,
+                        element:<Product/>
+                    },
+                    {
+                        path:'/admin/products/addNewProduct',
+                        element:<AddProduct/>
+                    }
+                ]
             },
             {
                 path:'/admin/suppliers',
-                element: <Suppliers/>
+                element: <SupplierLayout/>,
+                children:[
+                    {
+                       index:true,
+                        element:<Suppliers/>
+                    },
+                    {
+                        path:'/admin/suppliers/addNewSupplier',
+                        element:<AddSupplier/>
+                    }
+                ]
             },
             {
                 path:'/admin/orders',
