@@ -4,14 +4,11 @@
 @tailwind utilities;
 
 @layer components {
-  /*.input_design {*/
-  /*    @apply px-2.5 py-2.5 w-full text-sm text-gray-900 rounded-lg border border-[[#71318c]] appearance-none focus:outline-none focus:ring-0 focus:border-[#71318c];*/
-  /*}*/
   .input_design {
     @apply block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white rounded-lg border border-[#71318c] appearance-none focus:outline-none focus:ring-0 focus:border-[#71318c];
   }
   .label_design {
-    @apply absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2;
+    @apply absolute text-sm text-gray-500 duration-300 transform  bg-white px-2;
   }
   .nav {
     @apply flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 hover:bg-white hover:border-r-4 hover:border-[#71318c] active:bg-blue-100 text-white hover:text-black;

@@ -28,7 +28,7 @@ const Feature = () => {
                   <h3 className="mt-6 text-2xl text-white font-semibold">
                     {feature.type}
                   </h3>
-                  <p className="mt-2 font-display text-xl "> {feature.title}</p>
+                  <p className="mt-2 text-xl "> {feature.title}</p>
                   <p className="mt-4 text-sm ">{feature.description}</p>
                 </div>
               </div>

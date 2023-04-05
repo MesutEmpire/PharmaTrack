@@ -90,16 +90,16 @@ ELSE
     UPDATE product SET quantity = @previousquantity - NEW.sale_quantity WHERE product_id = NEW.product_id;
     END IF;
 END ;
-#
-# CREATE TRIGGER generateProfitMargin
-#     AFTER INSERT ON sale
-#     FOR EACH ROW
-# BEGIN
-#     SET @costPrice  = (SELECT cost_price FROM product WHERE product_id = NEW.product_id);
-#     SET @sellingPrice  = (SELECT cost_price FROM product WHERE product_id = NEW.product_id);
-#     UPDATE sale SET profit_margin = @costPrice - @sellingPrice WHERE product_id = NEW.product_id;
-#
-# END ;
+
+ CREATE TRIGGER generateProfitMargin
+     AFTER INSERT ON sale
+     FOR EACH ROW
+ BEGIN
+     SET @costPrice  = (SELECT cost_price FROM product WHERE product_id = NEW.product_id);
+     SET @sellingPrice  = (SELECT cost_price FROM product WHERE product_id = NEW.product_id);
+     UPDATE sale SET profit_margin = @costPrice - @sellingPrice WHERE product_id = NEW.product_id;
+
+ END ;
 
 CREATE TRIGGER generateProfitMargin
     BEFORE INSERT ON sale
@@ -113,9 +113,7 @@ BEGIN
     SET NEW.profit_margin = (sellingPrice - costPrice)*NEW.sale_quantity;
 END;
 
-
-#
-#  DROP TRIGGER IF EXISTS generateProfitMargin;
+--  DROP TRIGGER IF EXISTS generateProfitMargin;
 INSERT INTO pharmacy (pharmacy_name, pharmacy_email)
 VALUES
     ('Juja Pharmaceuticals', 'juja@gmail.com'),
@@ -202,14 +200,14 @@ SELECT * FROM sale;
 
 SELECT * FROM user;
 
-# product details depending on Pharmacy and having the supplier names
+-- product details depending on Pharmacy and having the supplier names
 SELECT * FROM product
 JOIN pharma.pharmacy  on product.pharmacy_id = pharmacy.pharmacy_id
 JOIN pharma.supplier  on product.supplier_id = supplier.supplier_id
 WHERE product.pharmacy_id = 6001;
 
 
-# product order details depending on Pharmacy and having the supplier names
+-- product order details depending on Pharmacy and having the supplier names
 SELECT * FROM purchaseOrder
 JOIN product p ON purchaseOrder.product_id = p.product_id
 JOIN pharmacy ON p.pharmacy_id = pharmacy.pharmacy_id
@@ -240,19 +238,19 @@ JOIN pharma.pharmacy  on product.pharmacy_id = pharmacy.pharmacy_id
 JOIN pharma.supplier  on product.supplier_id = supplier.supplier_id
 WHERE product.expiry_date < @expiration_date AND product.pharmacy_id = 6002;
 
-# SELECT * FROM supplier
-# JOIN pharma.product on product.supplier_id = supplier.supplier_id
-# WHERE product.pharmacy_id = 6001;
+SELECT * FROM supplier
+JOIN pharma.product on product.supplier_id = supplier.supplier_id
+WHERE product.pharmacy_id = 6001;
 
-# SELECT *
-# FROM supplier
-# WHERE supplier_id NOT IN (
-#     SELECT supplier_id
-#     FROM product
-# )
-# UNION SELECT * FROM supplier
-#                   JOIN pharma.product on product.supplier_id = supplier.supplier_id
-# WHERE product.pharmacy_id = 6001;
+SELECT *
+FROM supplier
+WHERE supplier_id NOT IN (
+    SELECT supplier_id
+    FROM product
+)
+UNION SELECT * FROM supplier
+                  JOIN pharma.product on product.supplier_id = supplier.supplier_id
+WHERE product.pharmacy_id = 6001;
 
 SELECT *
 FROM supplier

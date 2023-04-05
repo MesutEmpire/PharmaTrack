@@ -4,7 +4,7 @@ import ErrorComponent from "./ErrorComponent";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setProductsForm,
-  selectErrorPostProduct,
+  selectErrorProduct,
   setErrorPostProduct,
   selectProductFormData,
 } from "../stores/productSlice";
@@ -16,7 +16,7 @@ import {
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 
 const AddProduct = () => {
-  const errorPostProduct = useSelector(selectErrorPostProduct);
+  const {errorPost} = useSelector(selectErrorProduct);
   const productData = useSelector(selectProductFormData);
   const suppliers = useSelector(selectSupplierAddProduct);
   const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
@@ -26,7 +26,7 @@ const AddProduct = () => {
     getAddSuppliers();
   }, []);
   const getAddSuppliers = () => {
-    const { pharmacy_id } = JSON.parse(localStorage.getItem("currentUser"));
+    const { pharmacy_id } = JSON.parse(localStorage.getItem("currentUser") as any);
     fetch(`http://localhost:3210/api/addSupplier/${pharmacy_id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -246,7 +246,7 @@ const AddProduct = () => {
                       Add
                     </button>
                   </form>
-                  <ErrorComponent fetchError={errorPostProduct} />
+                  <ErrorComponent fetchError={errorPost} />
                 </div>
               </div>
             </div>

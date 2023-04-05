@@ -1,5 +1,3 @@
-import { FormEvent } from "react";
-import { setSearchedProduct } from "../stores/productSlice";
 import { useDispatch } from "react-redux";
 import IconSearch from "../icons/IconSearch";
 

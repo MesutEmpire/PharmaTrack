@@ -1,12 +1,14 @@
 import ErrorComponent from "./ErrorComponent";
 import { useSelector } from "react-redux";
-import { selectProduct, setSearchedProduct } from "../stores/productSlice";
+import { selectProduct, setSearchedProduct,selectExpiredProducts,selectLowInventoryProducts } from "../stores/productSlice";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import IconAddProduct from "../icons/IconAddProduct";
 
 const Product = () => {
   const { products, error } = useSelector(selectProduct);
+    const { expiredProducts, expiryError } = useSelector(selectExpiredProducts);
+    const { lowInventoryProducts, lowInvetoryError } = useSelector(selectLowInventoryProducts);
   return (
     <div>
       <h2>Products</h2>

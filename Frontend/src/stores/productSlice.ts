@@ -1,21 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./mainStore";
+import {useDispatch} from "react-redux";
 
 const productSlice = createSlice({
   name: "product",
   initialState: {
     products: [],
     productForm: {},
-    errorPost: null,
+    // errorPost: null,
     searchedProduct: null,
     foundSearchProducts: [],
-    error: null as unknown,
+    error: {
+      errorGet:null,
+      errorPost: null,
+      expiring:null,
+      lowInventory:null
+
+    },
     expiringProducts: [],
+    lowInventoryProducts:[],
+    // errorExpiring:{
+    //   expiring:null,
+    //   lowInventory:null
+    // }
   },
   reducers: {
     setProducts: (state, action) => {
       state.products = action.payload;
-      setExpiredDate();
     },
     setProductsForm: (state, action) => {
       const { pharmacy_id } = JSON.parse(localStorage.getItem("currentUser"));
@@ -26,7 +37,7 @@ const productSlice = createSlice({
       };
     },
     setErrorPostProduct: (state, action) => {
-      state.errorPost = action.payload;
+      state.error.errorPost = action.payload;
     },
     setSearchedProduct: (state, action) => {
       state.searchedProduct = action.payload;
@@ -38,19 +49,20 @@ const productSlice = createSlice({
         );
       }
     },
-    setErrorProducts: (state, action) => {
-      state.error = action.payload;
+    setExpiringProducts: (state, action) => {
+      state.expiringProducts = action.payload;
     },
-    setExpiredDate: (state) => {
-      const today = new Date();
-      const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-      state.expiringProducts = state.products
-        .filter((product) => {
-          const expirationDate = new Date(product.expiry_date);
-          return expirationDate >= today && expirationDate <= nextMonth;
-        })
-        .sort((a, b) => new Date(b.expiry_date) - new Date(a.expiry_date));
-      console.log(state.expiringProducts);
+    setLowInventoryProducts: (state, action) => {
+      state.lowInventoryProducts = action.payload;
+    },
+    setErrorExpiringProducts: (state, action) => {
+      state.error.expiring = action.payload;
+    },
+    setErrorLowInventoryProducts: (state, action) => {
+      state.error.lowInventory = action.payload;
+    },
+    setErrorProducts: (state, action) => {
+      state.error.errorGet = action.payload;
     },
   },
 });
@@ -62,21 +74,31 @@ export const {
   setProducts,
   setErrorProducts,
   setSearchedProduct,
-  setExpiredDate,
+    setErrorLowInventoryProducts,
+    setLowInventoryProducts,
+    setErrorExpiringProducts,
+    setExpiringProducts
 } = productSlice.actions;
 export const selectProduct = (state: RootState) => {
   if (state.product.searchedProduct) {
     return {
       products: state.product.foundSearchProducts,
-      error: state.product.error,
+      error: state.product.error.errorGet,
     };
   }
-  return { products: state.product.products, error: state.product.error };
+  return { products: state.product.products, error: state.product.error.errorGet };
 };
-export const selectNoProducts = (state: RootState) =>
-  state.product.products.length;
+export const selectExpiredProducts = (state: RootState) => {
 
-export const selectErrorPostProduct = (state: RootState) =>
-  state.product.errorPost;
+   return {expiredProducts: state.product.expiringProducts, expiryError: state.product.error.expiring}
+
+}
+export const selectLowInventoryProducts = (state: RootState) => {
+  return {lowInventoryProducts: state.product.lowInventoryProducts, lowInvetoryError: state.product.error.lowInventory}
+}
+
+
+export const selectErrorProduct = (state: RootState) =>
+  state.product.error;
 export const selectProductFormData = (state: RootState) =>
   state.product.productForm;

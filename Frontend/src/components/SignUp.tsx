@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectErrorPost,
@@ -10,6 +10,8 @@ import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { FormEvent } from "react";
 import ErrorComponent from "./ErrorComponent";
 
+import {signupFormValidation} from "../utils/functions";
+
 const SignUp = () => {
   const signUpData = useSelector(selectSignUpFormData);
   const { signUpError } = useSelector(selectErrorPost);
@@ -18,25 +20,37 @@ const SignUp = () => {
 
   const postData = (event: FormEvent) => {
     event.preventDefault();
-    fetch("http://localhost:3210/api/userAuth/sign_up", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(signUpData),
-    })
-      .then((res: Response) => {
-        if (res.status !== 200) {
-          if (res.status == 401) throw Error("Unauthorized Access");
-          throw Error("Failed to Register");
-        }
-        res.json();
-      })
-      .then(() => navigate("/login"))
-      .catch((error: any) => {
-        dispatch(setErrorSignUp(error.message));
-      });
+    signupFormValidation(signUpData)
+        .then(()=>{
+          fetch("http://localhost:3210/api/userAuth/sign_up", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(signUpData),
+          })
+              .then((res: Response) => {
+                if (res.status !== 200) {
+                  if (res.status == 401) throw Error("Unauthorized Access");
+                  throw Error("Failed to Register");
+                }
+                res.json();
+              })
+              .then(() => {
+                navigate("/login")
+                dispatch(setErrorSignUp(null));
+              })
+              .catch((error: any) => {
+                dispatch(setErrorSignUp(error.message));
+              });
+        })
+        .catch((error:any)=>{
+          console.log(error)
+          dispatch(setErrorSignUp(error));
+        })
+
   };
+
   return (
     <div className="bg-white">
       <div className="relative isolate px-6 pt-14 lg:px-8">
@@ -181,6 +195,15 @@ const SignUp = () => {
                 <button type="submit" className={"button px-36"}>
                   Sign Up
                 </button>
+                <div className="text-sm lg:text-base font-medium text-gray-500 dark:text-gray-300 mr-2 pr-2 my-4">
+                  Already have an Account ?
+                  <Link
+                      to="/login"
+                      className="text-blue-400 hover:text-blue-700 hover:underline dark:text-blue-500"
+                  >
+                    Login
+                  </Link>
+                </div>
               </form>
               <ErrorComponent fetchError={signUpError} />
             </div>

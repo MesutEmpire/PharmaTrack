@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import {createBrowserRouter, Navigate} from "react-router-dom";
 import HomeLayout from "../layouts/HomeLayout";
 import ErrorComponent from "../components/ErrorComponent";
 import Dashboard from "../components/Dashboard";
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <HomeLayout />,
-    // element:localStorage.getItem('currentUser') ? <HomeLayout/>:<Navigate to={'/login'}/>,
+    // element: localStorage.getItem('currentUser') ? <HomeLayout/>:<Navigate to={'/login'}/>,
     children: [
       {
         index: true,

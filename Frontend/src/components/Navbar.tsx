@@ -1,12 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutCurrentUser, selectCurrentUser } from "../stores/userAuthSlice";
-import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import React from "react";
 
 const Navbar = () => {
   const currentUser = useSelector(selectCurrentUser);
-  const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
+  const dispatch= useDispatch();
   const navigate = useNavigate();
 
   const logout = () => {

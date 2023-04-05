@@ -5,9 +5,11 @@ import { selectCurrentUser } from "../stores/userAuthSlice";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import { fetchData } from "../utils/data";
+import {useNavigate} from "react-router-dom"
 const HomeLayout = () => {
   const { pharmacy_id } = useSelector(selectCurrentUser);
-
+const currentUser = useSelector(selectCurrentUser)
+  const navigate = useNavigate()
   const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
 
   const productLoader = () => {
@@ -38,6 +40,12 @@ const HomeLayout = () => {
   useEffect(() => {
     productLoader();
   }, [pharmacy_id]);
+
+  useEffect(()=>{
+    if(Object.keys(currentUser).length === 0) {
+      navigate('/')
+    }
+  },[currentUser])
 
   return (
     <div>

@@ -4,34 +4,9 @@ import { partners } from "../utils/data";
 const Landing = () => {
   return (
     <div className="mx-auto max-w-4xl flex">
-      <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
-        <svg
-          className="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
-          viewBox="0 0 1155 678"
-        >
-          <path
-            fill="url(#45de2b6b-92d5-4d68-a6a0-9b9b2abad533)"
-            fillOpacity=".3"
-            d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
-          />
-          <defs>
-            <linearGradient
-              id="45de2b6b-92d5-4d68-a6a0-9b9b2abad533"
-              x1="1155.49"
-              x2="-78.208"
-              y1=".177"
-              y2="474.645"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#9089FC" />
-              <stop offset={1} stopColor="#FF80B5" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
       <div className="pt-[24em]">
         <div className="text-35xl font-medium tracking-tight text-slate-900 sm:text-7xl text-center">
-          <div className="flex flex-nowrap justify-center items-center ">
+          <div className="flex justify-center items-center ">
             <h1 className="text-center">Accounting</h1>
             <div className="text-primary">
               <p className="pl-3 text-center text-secondary">made simple</p>
@@ -50,7 +25,6 @@ const Landing = () => {
         </div>
         <div className="block">
           <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700 text-center">
-            {" "}
             Say goodbye to the hassle of managing your pharmacy inventory with
             our easy-to-use system that balances accuracy with simplicity, so
             you can streamline your process and stay on top of stock levels
@@ -69,7 +43,6 @@ const Landing = () => {
             Trusted by these six companies so far
           </p>
           <ul
-            role="list"
             className="mt-4  columns-3 items-center justify-center gap-x-32 gap-y-8 "
           >
             {partners.map((partner: any, key: number) => {

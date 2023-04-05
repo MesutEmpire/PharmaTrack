@@ -12,7 +12,6 @@ const cookieParser = require("cookie-parser");
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
-// app.use(bodyParser.json())
 
 app.use((req: any, res: any, next: NextFunction) => {
   console.log(`${req.method} ------> ${req.url} at ${new Date().toString()}`);

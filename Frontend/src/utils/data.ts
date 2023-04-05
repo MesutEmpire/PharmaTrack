@@ -2,7 +2,13 @@ import IconDashboard from "../icons/IconDashboard";
 import IconProduct from "../icons/IconProduct";
 import IconUser from "../icons/IconUser";
 import IconLogout from "../icons/IconLogout";
-import { setErrorProducts, setProducts } from "../stores/productSlice";
+import {
+  setErrorExpiringProducts,
+  setErrorLowInventoryProducts,
+  setErrorProducts, setExpiringProducts,
+  setLowInventoryProducts,
+  setProducts
+} from "../stores/productSlice";
 import { setErrorSuppliers, setSuppliers } from "../stores/supplierSlice";
 import { setErrorOrders, setOrders } from "../stores/orderSlice";
 import { setErrorSales, setSales } from "../stores/saleSlice";
@@ -86,6 +92,16 @@ export const fetchData = [
     store: setUsers,
     error: setErrorUsers,
   },
+  {
+    tag: "expiring_product",
+    store: setExpiringProducts,
+    error: setErrorExpiringProducts,
+  },
+  {
+    tag: "low_product",
+    store: setLowInventoryProducts,
+    error: setErrorLowInventoryProducts,
+  },
 ];
 
 export const partners = [
@@ -162,7 +178,7 @@ export const testimonials = [
   {
     id: 1,
     comment:
-      "TaxPal is so easy to use I\n" +
+      "Pharma Track is so easy to use I\n" +
       "can’t help but wonder if it’s really doing the things the government expects me\n" +
       "to do.",
     name: "Sheryl Berge",
@@ -180,7 +196,7 @@ export const testimonials = [
   {
     id: 3,
     comment:
-      "The best part about TaxPal is\n" +
+      "The best part about Pharma Track is\n" +
       "                                        every time I pay my employees, my bank balance doesn’t go down like it used to.\n" +
       "                                        Looking forward to spending this extra cash when I figure out why my card is\n" +
       "                                        being declined.",
@@ -191,7 +207,7 @@ export const testimonials = [
   {
     id: 4,
     comment:
-      "    The best part about TaxPal is\n" +
+      "    The best part about Pharma Track is\n" +
       "    every time I pay my employees, my bank balance doesn’t go down like it used to.\n" +
       "    Looking forward to spending this extra cash when I figure out why my card is\n" +
       "being declined.",
@@ -203,7 +219,7 @@ export const testimonials = [
     id: 5,
     comment:
       "  There are so many things I had\n" +
-      "    to do with my old software that I just don’t do at all with TaxPal. Suspicious\n" +
+      "    to do with my old software that I just don’t do at all with Pharma Track. Suspicious\n" +
       "  but I can’t say I don’t love it.",
     name: " Erin Powlowski",
     position: "COO at Armstrong Inc",
@@ -212,7 +228,7 @@ export const testimonials = [
   {
     id: 6,
     comment:
-      " I used to have to remit tax to the EU and with TaxPal I somehow don’t have to do that anymore. Nervous to travel there now though.",
+      " I used to have to remit tax to the EU and with Pharma Track I somehow don’t have to do that anymore. Nervous to travel there now though.",
     name: "    Peter Renolds",
     position: "Founder of West Inc",
     img: "test6.jpg",
