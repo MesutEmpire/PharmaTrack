@@ -7,8 +7,8 @@ const Sidebar = () => {
   const currentUser = useSelector(selectCurrentUser);
   return (
     <div className=" flex gap-x-8 max-w-8xl min-h-screen">
-      <div className="flex justify-center w-1/6 bg-[#482059]  border-r border-gray-700 ">
-        <aside className="fixed left-0  w-[15%] items-center my-24 mx-4">
+      <div className="flex justify-center w-[15%] bg-[#482059] border-r border-gray-700 ">
+        <aside className="left-0 items-center my-24 mx-4 relative w-full">
           {data.map((data: any, key: number) => {
             return (
               <NavLink className="nav" to={data.link}>

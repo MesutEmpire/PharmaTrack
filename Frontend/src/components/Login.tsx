@@ -121,21 +121,7 @@ const Login = () => {
                       </label>
                     </div>
 
-                    <div className="flex justify-between mb-6">
-                      <div className="flex items-center">
-                        <input
-                          name="remember_me"
-                          type="checkbox"
-                          className="mr-2 h-5 w-5 bg-[#71318c] focus:ring-[#71318c] border-gray-300 rounded-lg"
-                        />
-                        <label
-                          htmlFor="remember_me"
-                          className="text-sm lg:text-base font-normal text-gray-900"
-                        >
-                          Remember me
-                        </label>
-                      </div>
-
+                    <div className="flex justify-end mb-6">
                       <div>
                         <Link
                           to='/forgot_password'
@@ -154,7 +140,7 @@ const Login = () => {
                       Not registered ?
                       <Link
                         to="/sign_up"
-                        className="text-blue-400 hover:text-blue-700 hover:underline dark:text-blue-500"
+                        className="pl-3 text-blue-400 hover:text-blue-700 hover:underline dark:text-blue-500"
                       >
                         Create account
                       </Link>
