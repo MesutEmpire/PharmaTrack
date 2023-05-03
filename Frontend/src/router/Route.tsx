@@ -1,4 +1,4 @@
-import {createBrowserRouter, Navigate} from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
 import HomeLayout from "../layouts/HomeLayout";
 import ErrorComponent from "../components/ErrorComponent";
 import Dashboard from "../components/Dashboard";
@@ -14,6 +14,8 @@ import AddSupplier from "../components/AddSupplier";
 import SupplierLayout from "../layouts/SupplierLayout";
 import AddProduct from "../components/addProduct";
 import ProductLayout from "../layouts/ProductLayout";
+import ForgotPassword from "../components/ForgotPassword";
+import ResetPassword from "../components/ResetPassword";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +38,14 @@ const router = createBrowserRouter([
     path: "/sign_up",
     element: <SignUp />,
   },
-
+  {
+    path: "/forgot_password",
+    element: <ForgotPassword />
+  },
+  {
+    path: "/reset_password/:data_id",
+    element: <ResetPassword />
+  },
   {
     path: "/admin",
     element: <HomeLayout />,
