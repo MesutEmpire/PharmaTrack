@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom";
+import {createBrowserRouter, redirect} from "react-router-dom";
 import HomeLayout from "../layouts/HomeLayout";
 import ErrorComponent from "../components/ErrorComponent";
 import Dashboard from "../components/Dashboard";
@@ -16,12 +16,25 @@ import AddProduct from "../components/addProduct";
 import ProductLayout from "../layouts/ProductLayout";
 import ForgotPassword from "../components/ForgotPassword";
 import ResetPassword from "../components/ResetPassword";
+import NewHomeLayout from "../layouts/NewHomeLayout";
+import HomePage from "../pages/Home";
 
 const router = createBrowserRouter([
+  // {
+  //   path: "/",
+  //   element: <LandingLayout />,
+  //   errorElement: <ErrorComponent />,
+  // },
   {
     path: "/",
-    element: <LandingLayout />,
+    element: <NewHomeLayout />,
     errorElement: <ErrorComponent />,
+    children:[
+      {
+        index: true,
+        element: <HomePage />,
+      }
+    ]
   },
   {
     path: "/login",
@@ -49,6 +62,13 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <HomeLayout />,
+    loader: () => {
+      if (localStorage.getItem("currentUser")) {
+        return localStorage.getItem("currentUser");
+      } else {
+        return redirect("/login");
+      }
+    },
     // element: localStorage.getItem('currentUser') ? <HomeLayout/>:<Navigate to={'/login'}/>,
     children: [
       {

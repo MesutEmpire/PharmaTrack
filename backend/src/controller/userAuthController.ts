@@ -48,13 +48,14 @@ const sign_up = async (req: Request, res: Response) => {
 
   const newPassword = await encryptPass(password);
 
+  console.log(req.body)
+
   pool.getConnection((error: ErrnoException, db: any) => {
     try {
       //INSERT OWNER
       db.promise()
         .query({
-          sql: `INSERT INTO user (username, password,pharmacy_id)
-                  VALUES (?, ?,?)`,
+          sql: `CALL sign_up_user(?,?,?) `,
           values: [username, newPassword, pharmacy_id],
         })
         .then((result: any) => {
@@ -62,10 +63,12 @@ const sign_up = async (req: Request, res: Response) => {
           res.status(200).json({ message: "Registration successful" });
         })
         .catch((error: any) => {
+            console.log(error)
           db.rollback();
           res.status(500).json(error.sqlMessage);
         });
     } catch (error: any) {
+        console.log(error)
       db.rollback();
       res.status(500).json(error.sqlMessage);
     } finally {
@@ -107,12 +110,12 @@ const resetPassword = async (req: Request, res: Response) => {
     const newPassword = await encryptPass(password);
     pool.query(
         {
-            sql: `UPDATE user SET password = ? WHERE user_id = ? `,
+            sql: `CALL resetPassword(? ,?) `,
             values: [newPassword, user_id],
         },
         (error: QueryError, results: RowDataPacket) => {
             if (error) res.status(500).json(error.message);
-            res.json(results);
+            res.json(results[0]);
         }
     );
 }

@@ -4,13 +4,13 @@ import { testimonials } from "../utils/data";
 
 const Testimonial = () => {
   return (
-    <div id={"testimonials"} className="bg-slate-50 py-20 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl md:text-center">
+    <div id={"testimonials"} className="bg-slate-50 py-10">
+      <div className="flex flex-col gap-y-12 container mx-auto my-7 h-full relative layoutWidth">
+        <div className="flex flex-col  justify-center items-center gap-y-4">
           <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
             Loved by businesses worldwide.
           </h2>
-          <p className="mt-4 text-lg tracking-tight text-slate-700">
+          <p className=" text-lg tracking-tight text-slate-700 max-w-prose">
             Our software is so simple that people can’t help but fall in love
             with it. Simplicity is easy when you just skip tons of
             mission-critical features.
@@ -18,15 +18,15 @@ const Testimonial = () => {
         </div>
         <ul
           role="list"
-          className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3"
+          className="flex flex-row flex-wrap flex-initial gap-y-12 gap-x-10 justify-start items-baseline"
         >
           {testimonials.map((testimonial: any, key: number) => {
             return (
-              <li key={testimonial.id}>
+              <li key={testimonial.id} className='flex basis-80'>
                 <figure className="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
                   <IconQuote />
                   <blockquote className="relative">
-                    <p className="text-lg tracking-tight text-slate-900">
+                    <p className="text-lg tracking-tight text-slate-900 line-clamp-4">
                       {testimonial.comment}
                     </p>
                   </blockquote>

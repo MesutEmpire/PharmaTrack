@@ -21,14 +21,12 @@ const getSaleData = (req: Request, res: Response) => {
   const { pharmacy } = req.params;
   pool.query(
     {
-      sql: `
-                SELECT * FROM sale JOIN pharma.product on sale.product_id = product.product_id
-                WHERE product.pharmacy_id = ? ;`,
+      sql: `CALL  getSaleData(?);`,
       values: [pharmacy],
     },
     (error: QueryError, results: RowDataPacket) => {
       if (error) res.status(500).json(error.message);
-      res.json(results);
+      res.json(results[0]);
     }
   );
 };
@@ -37,15 +35,13 @@ const getUserData = (req: Request, res: Response) => {
   const { pharmacy } = req.params;
   pool.query(
     {
-      sql: `
-                SELECT * FROM user JOIN pharma.pharmacy on user.pharmacy_id = pharmacy.pharmacy_id
-                WHERE pharmacy.pharmacy_id = ?;`,
+      sql: `CALL getUserData(?);`,
       values: [pharmacy],
     },
     (error: QueryError, results: RowDataPacket) => {
       if (error) res.status(500).json(error.message);
 
-      res.json(results);
+      res.json(results[0]);
     }
   );
 };
@@ -54,15 +50,12 @@ const getLowInventoryData = (req: Request, res: Response) => {
   const { pharmacy } = req.params;
   pool.query(
     {
-      sql: `
-                SELECT * FROM product JOIN pharma.pharmacy  on product.pharmacy_id = pharmacy.pharmacy_id
-                JOIN pharma.supplier  on product.supplier_id = supplier.supplier_id
-                WHERE quantity < 10 AND product.pharmacy_id = ?;`,
+      sql: `CALL getLowInventoryData(?);`,
       values: [pharmacy],
     },
     (error: QueryError, results: RowDataPacket) => {
       if (error) res.status(500).json(error.message);
-      res.json(results);
+      res.json(results[0]);
     }
   );
 };
@@ -71,17 +64,12 @@ const getPurchaseOrderData = (req: Request, res: Response) => {
   const { pharmacy } = req.params;
   pool.query(
     {
-      sql: `
-                SELECT * FROM purchaseOrder 
-                JOIN product p ON purchaseOrder.product_id = p.product_id
-                JOIN pharmacy ON p.pharmacy_id = pharmacy.pharmacy_id
-                JOIN pharma.supplier  on p.supplier_id = supplier.supplier_id
-                WHERE pharmacy.pharmacy_id = ?;`,
+      sql: `CALL getPurchaseOrderData(?);`,
       values: [pharmacy],
     },
     (error: QueryError, results: RowDataPacket) => {
       if (error) res.status(500).json(error.message);
-      res.json(results);
+      res.json(results[0]);
     }
   );
 };
@@ -90,16 +78,12 @@ const getProductData = (req: Request, res: Response) => {
   const { pharmacy } = req.params;
   pool.query(
     {
-      sql: `
-                SELECT * FROM product
-                JOIN pharma.pharmacy  on product.pharmacy_id = pharmacy.pharmacy_id
-                JOIN pharma.supplier  on product.supplier_id = supplier.supplier_id
-                WHERE product.pharmacy_id = ?;`,
+      sql: `CALL getProductData(?);`,
       values: [pharmacy],
     },
     (error: QueryError, results: RowDataPacket) => {
       if (error) res.status(500).json(error.message);
-      res.json(results);
+      res.json(results[0]);
     }
   );
 };
@@ -108,15 +92,12 @@ const getSupplierData = (req: Request, res: Response) => {
   const { pharmacy } = req.params;
   pool.query(
     {
-      sql: `
-                SELECT * FROM supplier
-                JOIN pharma.product on product.supplier_id = supplier.supplier_id
-                WHERE product.pharmacy_id = ?;`,
+      sql: `CALL getSupplierData(?);`,
       values: [pharmacy],
     },
     (error: QueryError, results: RowDataPacket) => {
       if (error) res.status(500).json(error.message);
-      res.json(results);
+      res.json(results[0]);
     }
   );
 };
@@ -125,16 +106,12 @@ const getExpiringProductData = (req: Request, res: Response) => {
   const { pharmacy } = req.params;
   pool.query(
     {
-      sql: `
-                SELECT * FROM product
-                JOIN pharma.pharmacy  on product.pharmacy_id = pharmacy.pharmacy_id
-                JOIN pharma.supplier  on product.supplier_id = supplier.supplier_id
-                WHERE product.expiry_date < DATE_ADD(CURDATE(), INTERVAL 3 MONTH) AND product.pharmacy_id = ?;`,
+      sql: `CALL getExpiringProductData(?);`,
       values: [pharmacy],
     },
     (error: QueryError, results: RowDataPacket) => {
       if (error) res.status(500).json(error.message);
-      res.json(results);
+      res.json(results[0]);
     }
   );
 };
@@ -144,47 +121,31 @@ const getAddSuppliers = (req: Request, res: Response) => {
   const { pharmacy } = req.params;
   pool.query(
     {
-      sql: `
-                SELECT *
-                FROM supplier
-                WHERE supplier_id NOT IN (
-                    SELECT supplier_id
-                    FROM product
-                )
-                UNION
-                SELECT s.*
-                FROM supplier s
-                JOIN product p on p.supplier_id = s.supplier_id
-                WHERE p.pharmacy_id = ?;`,
+      sql: `CALL getAddSuppliers(?);`,
       values: [pharmacy],
     },
     (error: QueryError, results: RowDataPacket) => {
       if (error) res.status(500).json(error.message);
-      res.json(results);
+      res.json(results[0]);
     }
   );
 };
 
 const addData = (req: Request, res: Response) => {
   const { table_name, data } = req.body;
-  console.log(table_name);
-  const fields = Object.keys(data);
-  const values = Object.values(data);
-
-  const sql = `INSERT INTO ${table_name} (${fields.join(", ")}) VALUES (${fields
-    .map(() => "?")
-    .join(", ")})`;
-
+console.log(table_name)
+  console.log(data)
   pool.query(
     {
-      sql: sql,
-      values: values,
+      sql: `CALL addData(?,?)`,
+      values: [table_name,JSON.stringify(data)],
     },
     (error: QueryError, results: RowDataPacket) => {
       if (error) {
         res.status(500).json(error.message);
       } else {
-        res.json(results);
+        console.log(error)
+        res.json(results[0]);
       }
     }
   );
@@ -197,12 +158,12 @@ const deleteData = (req: Request, res: Response) => {
   console.log(data_id);
   pool.query(
     {
-      sql: `DELETE FROM ${table_name} WHERE ${table_name}_id = ?`,
-      values: [data_id],
+      sql: `CALL deleteData(?,?)`,
+      values: [table_name,data_id],
     },
     (error: QueryError, results: RowDataPacket) => {
       if (error) res.status(500).json(error.message);
-      res.json(results);
+      res.json(results[0]);
     }
   );
 };
@@ -210,12 +171,12 @@ const updateData = (req: Request, res: Response) => {
   const { table_name, data_id, updateField_name, updateField_value } = req.body;
   pool.query(
     {
-      sql: `UPDATE  ${table_name} SET ${updateField_name} = ? WHERE ${table_name}_id = ? `,
-      values: [updateField_value, data_id],
+      sql: `CALL updateData(?,?,?,?) `,
+      values: [table_name,updateField_name,updateField_value, data_id],
     },
     (error: QueryError, results: RowDataPacket) => {
       if (error) res.status(500).json(error.message);
-      res.json(results);
+      res.json(results[0]);
     }
   );
 };

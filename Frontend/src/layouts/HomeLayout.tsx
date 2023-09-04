@@ -38,14 +38,14 @@ const currentUser = useSelector(selectCurrentUser)
     });
   };
   useEffect(() => {
-    productLoader();
+   if(pharmacy_id)  productLoader();
   }, [pharmacy_id]);
 
-  useEffect(()=>{
-    if(Object.keys(currentUser).length === 0) {
-      navigate('/')
-    }
-  },[currentUser])
+  // useEffect(()=>{
+  //   if(Object.keys(currentUser).length === 0) {
+  //     navigate('/')
+  //   }
+  // },[currentUser])
 
   return (
     <div>

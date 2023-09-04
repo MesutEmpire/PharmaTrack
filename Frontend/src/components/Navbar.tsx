@@ -1,12 +1,28 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutCurrentUser, selectCurrentUser } from "../stores/userAuthSlice";
-import React from "react";
+import React, {useState} from "react";
 
 const Navbar = () => {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch= useDispatch();
   const navigate = useNavigate();
+  const [links,setLinks] = useState([
+    {
+      name:'Features',
+      path:'/#features'
+    },
+    {
+      name:'Testimonials',
+      path:'/#testimonials'
+    },
+    {
+      name:'Pricing',
+      path:'/#pricing'
+    }
+  ])
+
+  console.log(links)
 
   const logout = () => {
     fetch("http://localhost:3210/api/userAuth/logout")
@@ -28,39 +44,32 @@ const Navbar = () => {
       });
   };
   return (
-    <div className={"bg-white fixed top-0 w-full  z-[999]"}>
-      <nav className="border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
-        <div className="container flex flex-nowrap justify-between items-center mx-auto">
-          <div className="flex justify-evenly items-center gap-x-6">
+    <div className={"bg-white sticky top-0 w-full  z-[999] "}>
+        <div className="flex flex-nowrap flex-initial justify-between items-center layoutWidth">
+          <div className="flex justify-around items-center gap-x-20">
             <Link to="/" className="flex items-center">
               <img
                 src="/logo2.png"
                 className="mr-3 h-14 sm:h-16"
                 alt="Pharma Logo"
               />
-              <span className="self-center text-3xl font-semibold whitespace-nowrap text-slate-900 dark:text-white">
+              <span className="hidden md:flex self-center text-3xl font-semibold whitespace-nowrap text-slate-900">
                 Pharma Track
               </span>
             </Link>
-
-            <a
-              className="flex rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-              href="/#features"
-            >
-              Features
-            </a>
-            <a
-              className=" rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-              href="/#testimonials"
-            >
-              Testimonials
-            </a>
-            <a
-              className="rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-              href="/#pricing"
-            >
-              Pricing
-            </a>
+           <span className='hidden md:flex flex-row justify-around'>
+             { links.map((link) => {
+               return (
+                   <a   key={link.name}
+                        className="flex rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                        href={link.path}
+                   >
+                     {link.name}
+                   </a>
+               )
+             })
+             }
+           </span>
           </div>
           <div className="flex items-center md:order-2">
             {!(Object.keys(currentUser).length === 0) ? (
@@ -81,7 +90,6 @@ const Navbar = () => {
             )}
           </div>
         </div>
-      </nav>
     </div>
   );
 };

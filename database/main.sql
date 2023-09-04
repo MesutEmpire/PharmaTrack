@@ -91,15 +91,15 @@ ELSE
     END IF;
 END ;
 
- CREATE TRIGGER generateProfitMargin
-     AFTER INSERT ON sale
-     FOR EACH ROW
- BEGIN
-     SET @costPrice  = (SELECT cost_price FROM product WHERE product_id = NEW.product_id);
-     SET @sellingPrice  = (SELECT cost_price FROM product WHERE product_id = NEW.product_id);
-     UPDATE sale SET profit_margin = @costPrice - @sellingPrice WHERE product_id = NEW.product_id;
-
- END ;
+#  CREATE TRIGGER generateProfitMargin
+#      AFTER INSERT ON sale
+#      FOR EACH ROW
+#  BEGIN
+#      SET @costPrice  = (SELECT cost_price FROM product WHERE product_id = NEW.product_id);
+#      SET @sellingPrice  = (SELECT cost_price FROM product WHERE product_id = NEW.product_id);
+#      UPDATE sale SET profit_margin = @costPrice - @sellingPrice WHERE product_id = NEW.product_id;
+#
+#  END ;
 
 CREATE TRIGGER generateProfitMargin
     BEFORE INSERT ON sale

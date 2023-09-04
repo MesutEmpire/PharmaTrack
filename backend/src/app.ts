@@ -23,5 +23,5 @@ app.use("/api", router);
 socket(httpServer);
 
 httpServer.listen(process.env.PORT || 2000, () => {
-  console.log(`Listening to Port : ${process.env.PORT}`);
+  console.log(`Listening to Port : ${process.env.PORT || 2000}`);
 });
