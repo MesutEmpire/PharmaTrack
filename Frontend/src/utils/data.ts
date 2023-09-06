@@ -21,42 +21,95 @@ import IconReport from "../icons/IconReport";
 import IconInventory from "../icons/IconInventory";
 import IconContact from "../icons/IconContact";
 
-export const data = [
+export const navlinks = [
   {
     tag: "Dashboard",
     link: "/admin",
     icon: IconDashboard,
   },
   {
-    tag: "Products",
+    tag: "Inventory",
     link: "/admin/products",
-    icon: IconProduct,
+    icon: IconInventory,
   },
   {
-    tag: "Suppliers",
+    tag: "Purchase",
     link: "/admin/suppliers",
     icon: IconSupplier,
   },
   {
-    tag: "Orders",
+    tag: "Suppliers Return",
     link: "/admin/orders",
     icon: IconOrder,
   },
   {
-    tag: "Sales",
+    tag: "Invoice",
     link: "/admin/sales",
     icon: IconSale,
   },
   {
-    tag: "Users",
+    tag: "Sales",
     link: "/admin/users",
     icon: IconUser,
   },
+  {
+    tag: "Bill",
+    link: "/admin/users",
+    icon: IconUser,
+  },
+  {
+    tag: "Customers",
+    link: "/admin/users",
+    icon: IconUser,
+  },
+  {
+    tag: "Suppliers",
+    link: "/admin/users",
+    icon: IconUser,
+  }
   // {
   //   "tag" : "Invoices",
   //   "link":"/admin/invoices"
   // }
 ];
+
+
+// export const navlinks = [
+//   {
+//     tag: "Dashboard",
+//     link: "/admin",
+//     icon: IconDashboard,
+//   },
+//   {
+//     tag: "Products",
+//     link: "/admin/products",
+//     icon: IconProduct,
+//   },
+//   {
+//     tag: "Suppliers",
+//     link: "/admin/suppliers",
+//     icon: IconSupplier,
+//   },
+//   {
+//     tag: "Orders",
+//     link: "/admin/orders",
+//     icon: IconOrder,
+//   },
+//   {
+//     tag: "Sales",
+//     link: "/admin/sales",
+//     icon: IconSale,
+//   },
+//   {
+//     tag: "Users",
+//     link: "/admin/users",
+//     icon: IconUser,
+//   },
+//   // {
+//   //   "tag" : "Invoices",
+//   //   "link":"/admin/invoices"
+//   // }
+// ];
 
 const dashboard = [
   {

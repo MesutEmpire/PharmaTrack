@@ -4,7 +4,7 @@ import {Outlet} from "react-router-dom";
 const NewHomeLayout = () => {
     return (
         <div className="flex flex-col gap-y-6 w-full">
-            <Navbar />
+            <Navbar layout='home' />
             <Outlet />
         </div>
     );

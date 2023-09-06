@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutCurrentUser, selectCurrentUser } from "../stores/userAuthSlice";
 import React, {useState} from "react";
 
-const Navbar = () => {
+const Navbar = ({layout}) => {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch= useDispatch();
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Navbar = () => {
     }
   ])
 
-  console.log(links)
+  console.log(layout)
 
   const logout = () => {
     fetch("http://localhost:3210/api/userAuth/logout")
@@ -45,7 +45,7 @@ const Navbar = () => {
   };
   return (
     <div className={"bg-white sticky top-0 w-full  z-[999] "}>
-        <div className="flex flex-nowrap flex-initial justify-between items-center layoutWidth">
+        <div className={`flex flex-nowrap flex-initial justify-between items-center ${layout ==='home'? 'layoutWidth' :''}`} >
           <div className="flex justify-around items-center gap-x-20">
             <Link to="/" className="flex items-center">
               <img
@@ -58,7 +58,7 @@ const Navbar = () => {
               </span>
             </Link>
            <span className='hidden md:flex flex-row justify-around'>
-             { links.map((link) => {
+             { layout==='home' && links.map((link) => {
                return (
                    <a   key={link.name}
                         className="flex rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
@@ -84,7 +84,7 @@ const Navbar = () => {
                 </a>
               </div>
             ) : (
-              <Link to="/login" className={"button z-0"}>
+              <Link to="/sign_in" className={"button z-0"}>
                 Log In
               </Link>
             )}

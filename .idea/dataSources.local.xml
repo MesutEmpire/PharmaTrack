@@ -12,8 +12,8 @@
       <schema-mapping>
         <introspection-scope>
           <node kind="schema">
-            <name qname="pharma" />
             <name qname="@" />
+            <name qname="pharma" />
           </node>
         </introspection-scope>
       </schema-mapping>

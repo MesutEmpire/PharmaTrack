@@ -18,6 +18,11 @@ import ForgotPassword from "../components/ForgotPassword";
 import ResetPassword from "../components/ResetPassword";
 import NewHomeLayout from "../layouts/NewHomeLayout";
 import HomePage from "../pages/Home";
+import LoginLayout from "../layouts/LoginLayout";
+import SignInPage from "../pages/SignInPage";
+import SignUpPage from "../pages/SignUpPage";
+import AdminLayout from "../layouts/AdminLayout";
+import DashboardPage from "../pages/DashboardPage";
 
 const router = createBrowserRouter([
   // {
@@ -37,19 +42,87 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path: "/login",
-    element: <Login />,
-    // action:()=>{
-    //     return <Navigate to={'/admin'}/>
-    // }
+        path: "/sign_in",
+        element: <SignInPage />,
+    loader: () => {
+      if (localStorage.getItem("currentUser")) {
+        return redirect("/admin");
+      } else {
+        return null;
+      }
+    }
+  },
+  {
+        path: "/sign_up",
+        element: <SignUpPage />,
+    loader: () => {
+      if (localStorage.getItem("currentUser")) {
+        return redirect("/admin");
+      } else {
+        return null;
+      }
+    }
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    loader: () => {
+      if (localStorage.getItem("currentUser")) {
+        return localStorage.getItem("currentUser");
+      } else {
+        return redirect("/sign_in");
+      }
+    },
+    children: [
+      {
+        index: true,
+        element: <DashboardPage/>,
+      },
+      {
+        path: "products",
+        element: <ProductLayout />,
+        children: [
+          {
+            index: true,
+            element: <Product />,
+          },
+          {
+            path: "addNewProduct",
+            element: <AddProduct />,
+          },
+        ],
+      },
+      {
+        path: "suppliers",
+        element: <SupplierLayout />,
+        children: [
+          {
+            index: true,
+            element: <Suppliers />,
+          },
+          {
+            path: "addNewSupplier",
+            element: <AddSupplier />,
+          },
+        ],
+      },
+      {
+        path: "orders",
+        element: <Orders />,
+      },
+      {
+        path: "sales",
+        element: <Sales />,
+      },
+      {
+        path: "users",
+        element: <Users />,
+      },
+    ],
   },
   {
     path: "/error",
     element: <ErrorComponent />,
-  },
-  {
-    path: "/sign_up",
-    element: <SignUp />,
   },
   {
     path: "/forgot_password",
@@ -59,64 +132,64 @@ const router = createBrowserRouter([
     path: "/reset_password/:data_id",
     element: <ResetPassword />
   },
-  {
-    path: "/admin",
-    element: <HomeLayout />,
-    loader: () => {
-      if (localStorage.getItem("currentUser")) {
-        return localStorage.getItem("currentUser");
-      } else {
-        return redirect("/login");
-      }
-    },
-    // element: localStorage.getItem('currentUser') ? <HomeLayout/>:<Navigate to={'/login'}/>,
-    children: [
-      {
-        index: true,
-        element: <Dashboard />,
-      },
-      {
-        path: "/admin/products",
-        element: <ProductLayout />,
-        children: [
-          {
-            index: true,
-            element: <Product />,
-          },
-          {
-            path: "/admin/products/addNewProduct",
-            element: <AddProduct />,
-          },
-        ],
-      },
-      {
-        path: "/admin/suppliers",
-        element: <SupplierLayout />,
-        children: [
-          {
-            index: true,
-            element: <Suppliers />,
-          },
-          {
-            path: "/admin/suppliers/addNewSupplier",
-            element: <AddSupplier />,
-          },
-        ],
-      },
-      {
-        path: "/admin/orders",
-        element: <Orders />,
-      },
-      {
-        path: "/admin/sales",
-        element: <Sales />,
-      },
-      {
-        path: "/admin/users",
-        element: <Users />,
-      },
-    ],
-  },
+  // {
+  //   path: "/admin",
+  //   element: <HomeLayout />,
+  //   loader: () => {
+  //     if (localStorage.getItem("currentUser")) {
+  //       return localStorage.getItem("currentUser");
+  //     } else {
+  //       return redirect("/login");
+  //     }
+  //   },
+  //   // element: localStorage.getItem('currentUser') ? <HomeLayout/>:<Navigate to={'/login'}/>,
+  //   children: [
+  //     {
+  //       index: true,
+  //       element: <Dashboard />,
+  //     },
+  //     {
+  //       path: "/admin/products",
+  //       element: <ProductLayout />,
+  //       children: [
+  //         {
+  //           index: true,
+  //           element: <Product />,
+  //         },
+  //         {
+  //           path: "/admin/products/addNewProduct",
+  //           element: <AddProduct />,
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       path: "/admin/suppliers",
+  //       element: <SupplierLayout />,
+  //       children: [
+  //         {
+  //           index: true,
+  //           element: <Suppliers />,
+  //         },
+  //         {
+  //           path: "/admin/suppliers/addNewSupplier",
+  //           element: <AddSupplier />,
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       path: "/admin/orders",
+  //       element: <Orders />,
+  //     },
+  //     {
+  //       path: "/admin/sales",
+  //       element: <Sales />,
+  //     },
+  //     {
+  //       path: "/admin/users",
+  //       element: <Users />,
+  //     },
+  //   ],
+  // },
 ]);
 
 export default router;

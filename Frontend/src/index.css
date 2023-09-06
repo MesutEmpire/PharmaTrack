@@ -11,7 +11,7 @@
     @apply absolute text-sm text-gray-500 duration-300 transform  bg-white px-2;
   }
   .nav {
-    @apply flex flex-row items-center h-12 px-4 rounded-lg text-gray-600 hover:bg-white hover:border-r-4 hover:border-[#71318c] active:bg-blue-100 text-white hover:text-black;
+    @apply flex flex-row h-12 px-4 w-60 rounded-lg text-gray-500 gap-x-3;
   }
   .button {
     @apply rounded-md bg-[#482059] font-semibold shadow-sm  hover:bg-[#71318c] focus:ring-4 focus:outline-none focus:ring-[#71318c]  text-white text-sm lg:text-base w-full sm:w-auto py-2 px-4 lg:px-5 lg:py-2.5 text-center cursor-pointer;
@@ -29,7 +29,7 @@
     @apply min-h-screen overflow-auto bg-white text-slate-900 text-xs sm:text-sm md:text-base lg:text-lg text-center font-normal
   }
   .layoutWidth {
-    @apply max-w-[23rem] mx-auto sm:max-w-[40rem] md:max-w-[47rem] lg:max-w-[56rem] xl:max-w-[75rem] 2xl:max-w-[95rem] p-3
+    @apply max-w-[23rem] mx-auto sm:max-w-[40rem] md:max-w-[47rem] lg:max-w-[56rem] xl:max-w-[75rem] 2xl:max-w-[95rem]
   }
 
 }
