@@ -23,6 +23,7 @@ import SignInPage from "../pages/SignInPage";
 import SignUpPage from "../pages/SignUpPage";
 import AdminLayout from "../layouts/AdminLayout";
 import DashboardPage from "../pages/DashboardPage";
+import InventoryPage from "../pages/InventoryPage";
 
 const router = createBrowserRouter([
   // {
@@ -57,7 +58,7 @@ const router = createBrowserRouter([
         element: <SignUpPage />,
     loader: () => {
       if (localStorage.getItem("currentUser")) {
-        return redirect("/admin");
+        return redirect("/admin/dashboard");
       } else {
         return null;
       }
@@ -75,12 +76,27 @@ const router = createBrowserRouter([
     },
     children: [
       {
-        index: true,
+        // index: true,
+        path:'dashboard',
         element: <DashboardPage/>,
+        handle: {
+          crumb: () => "Dashboard"
+        },
+      },
+      {
+        // index: true,
+        path:'inventory',
+        element: <InventoryPage/>,
+        handle: {
+          crumb: () => "Inventory"
+        },
       },
       {
         path: "products",
         element: <ProductLayout />,
+        handle: {
+          crumb: () => "Products"
+        },
         children: [
           {
             index: true,
@@ -89,12 +105,18 @@ const router = createBrowserRouter([
           {
             path: "addNewProduct",
             element: <AddProduct />,
+            handle: {
+              crumb: () => "Add New Product"
+            },
           },
         ],
       },
       {
         path: "suppliers",
         element: <SupplierLayout />,
+        handle: {
+          crumb: () => "Suppliers"
+        },
         children: [
           {
             index: true,
@@ -103,20 +125,32 @@ const router = createBrowserRouter([
           {
             path: "addNewSupplier",
             element: <AddSupplier />,
+            handle: {
+              crumb: () => "Add New Supplier"
+            },
           },
         ],
       },
       {
         path: "orders",
         element: <Orders />,
+        handle: {
+          crumb: () => "Orders"
+        },
       },
       {
         path: "sales",
         element: <Sales />,
+        handle: {
+          crumb: () => "Sales"
+        },
       },
       {
         path: "users",
         element: <Users />,
+        handle: {
+          crumb: () => "Users"
+        },
       },
     ],
   },

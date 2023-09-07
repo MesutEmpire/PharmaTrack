@@ -20,17 +20,42 @@ import React from "react";
 import IconReport from "../icons/IconReport";
 import IconInventory from "../icons/IconInventory";
 import IconContact from "../icons/IconContact";
+import IconPurchase from "../icons/IconPurchase";
+import IconReturn from "../icons/IconReturn";
+import IconInvoice from "../icons/IconInvoice";
+import IconBill from "../icons/IconBill";
+import IconCustomers from "../icons/IconCustomers";
 
 export const navlinks = [
   {
     tag: "Dashboard",
-    link: "/admin",
+    link: "/admin/dashboard",
     icon: IconDashboard,
   },
   {
     tag: "Inventory",
-    link: "/admin/products",
+    link: "/admin/inventory",
     icon: IconInventory,
+  },
+  {
+    tag : "Purchase",
+    link:"/admin/suppliers",
+    icon: IconPurchase
+  },
+  {
+    tag: "Suppliers Return",
+    link: "/admin/orders",
+    icon: IconReturn,
+  },
+  {
+    tag: "Invoice",
+    link: "/admin/sales",
+    icon: IconInvoice,
+  },
+  {
+    tag: "Sales",
+    link: "/admin/users",
+    icon: IconSale,
   },
   {
     tag: "Purchase",
@@ -38,39 +63,20 @@ export const navlinks = [
     icon: IconSupplier,
   },
   {
-    tag: "Suppliers Return",
-    link: "/admin/orders",
-    icon: IconOrder,
-  },
-  {
-    tag: "Invoice",
-    link: "/admin/sales",
-    icon: IconSale,
-  },
-  {
-    tag: "Sales",
-    link: "/admin/users",
-    icon: IconUser,
-  },
-  {
     tag: "Bill",
     link: "/admin/users",
-    icon: IconUser,
+    icon: IconBill,
   },
   {
     tag: "Customers",
     link: "/admin/users",
-    icon: IconUser,
+    icon: IconCustomers,
   },
   {
     tag: "Suppliers",
     link: "/admin/users",
-    icon: IconUser,
-  }
-  // {
-  //   "tag" : "Invoices",
-  //   "link":"/admin/invoices"
-  // }
+    icon: IconSupplier,
+  },
 ];
 
 

@@ -17,6 +17,7 @@ const userAuthSLice = createSlice({
     resetPasswordForm:null,
     currentUser: {},
     isAuthenticated: false,
+    showDropdown:false
   },
   reducers: {
     setSignUpForm: (state, action) => {
@@ -46,14 +47,17 @@ const userAuthSLice = createSlice({
     setCurrentUser: (state, action) => {
       state.currentUser = action.payload;
     },
+    setShowDropdown: (state) => {
+      state.showDropdown = !state.showDropdown;
+    },
     logoutCurrentUser: (state) => {
       state.currentUser = {};
       state.isAuthenticated = false;
       state.errorPost.login = null;
       state.errorPost.sign_up = null;
+      state.showDropdown = false;
       localStorage.removeItem("auth");
       localStorage.removeItem("currentUser");
-      console.log("Success");
     },
   },
 });
@@ -69,6 +73,7 @@ export const {
   setErrorResetPassword,
   setCurrentUser,
   logoutCurrentUser,
+  setShowDropdown
 } = userAuthSLice.actions;
 export const userAuthReducer = userAuthSLice.reducer;
 
@@ -97,3 +102,5 @@ export const selectForgotPasswordFormData = (state: RootState) =>
     state.userAuth.forgotPasswordForm;
 export const selectResetPasswordFormData = (state: RootState) =>
     state.userAuth.resetPasswordForm;
+export const selectShowDropdown = (state:RootState) =>
+    state.userAuth.showDropdown

@@ -26,7 +26,7 @@ const ResetPassword = () => {
         event.preventDefault();
         signupFormValidation(resetPasswordData)
             .then(()=> {
-                fetch("http://localhost:3210/api/userAuth/reset_password", {
+                fetch(`${import.meta.env.VITE_BACKEND_URL}/userAuth/reset_password`, {
                     method: "PATCH",
                     headers: {"Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`,},

@@ -17,7 +17,7 @@ const ForgotPassword = () => {
 
     const postForgotPasswordData = (event: FormEvent) => {
         event.preventDefault();
-        fetch("http://localhost:3210/api/userAuth/forgot_password", {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/userAuth/forgot_password`, {
                method: "POST",
                     headers: { "Content-Type": "application/json" },
                     credentials: "include",

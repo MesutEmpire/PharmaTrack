@@ -22,7 +22,7 @@ const Login = () => {
     event.preventDefault();
     loginFormValidation(loginData)
         .then(()=>{
-          fetch("http://localhost:3210/api/userAuth/login", {
+          fetch(`${import.meta.env.VITE_BACKEND_URL}/userAuth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -42,7 +42,7 @@ const Login = () => {
                 localStorage.setItem("currentUser", JSON.stringify(data));
                 dispatch(setCurrentUser(data));
                 dispatch(setErrorLogin(null));
-                return navigate("/admin");
+                return navigate("/admin/dashboard");
               })
               .catch((error: any) => {
                 dispatch(setErrorLogin(error.message));

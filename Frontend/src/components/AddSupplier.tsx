@@ -18,7 +18,7 @@ const AddSupplier = () => {
   const postLoginData = (event: FormEvent) => {
     event.preventDefault();
     console.log(supplierData);
-    fetch("http://localhost:3210/api/data", {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/data`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

@@ -22,7 +22,7 @@ const SignUp = () => {
     event.preventDefault();
     signupFormValidation(signUpData)
         .then(()=>{
-          fetch("http://localhost:3210/api/userAuth/sign_up", {
+          fetch(`${import.meta.env.VITE_BACKEND_URL}/userAuth/sign_up`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

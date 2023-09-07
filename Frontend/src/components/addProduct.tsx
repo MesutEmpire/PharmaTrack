@@ -27,7 +27,7 @@ const AddProduct = () => {
   }, []);
   const getAddSuppliers = () => {
     const { pharmacy_id } = JSON.parse(localStorage.getItem("currentUser") as any);
-    fetch(`http://localhost:3210/api/addSupplier/${pharmacy_id}`, {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/addSupplier/${pharmacy_id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -51,7 +51,7 @@ const AddProduct = () => {
   };
   const postLoginData = (event: FormEvent) => {
     event.preventDefault();
-    fetch("http://localhost:3210/api/data", {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/data`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

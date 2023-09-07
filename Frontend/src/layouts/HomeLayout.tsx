@@ -14,7 +14,7 @@ const currentUser = useSelector(selectCurrentUser)
 
   const productLoader = () => {
     fetchData.map((storeData: any) => {
-      fetch(`http://localhost:3210/api/${storeData.tag}/${pharmacy_id}`, {
+      fetch(`${import.meta.env.VITE_BACKEND_URL}/${storeData.tag}/${pharmacy_id}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
