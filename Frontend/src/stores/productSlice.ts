@@ -19,6 +19,7 @@ const productSlice = createSlice({
     },
     expiringProducts: [],
     lowInventoryProducts:[],
+    showProductModal:false
     // errorExpiring:{
     //   expiring:null,
     //   lowInventory:null
@@ -64,6 +65,9 @@ const productSlice = createSlice({
     setErrorProducts: (state, action) => {
       state.error.errorGet = action.payload;
     },
+    setShowProductModal:(state,action) => {
+      state.showProductModal = action.payload
+}
   },
 });
 
@@ -77,7 +81,8 @@ export const {
     setErrorLowInventoryProducts,
     setLowInventoryProducts,
     setErrorExpiringProducts,
-    setExpiringProducts
+    setExpiringProducts,
+  setShowProductModal
 } = productSlice.actions;
 export const selectProduct = (state: RootState) => {
   if (state.product.searchedProduct) {
@@ -102,3 +107,5 @@ export const selectErrorProduct = (state: RootState) =>
   state.product.error;
 export const selectProductFormData = (state: RootState) =>
   state.product.productForm;
+export const selectShowProductModal = (state:RootState) =>
+    state.product.showProductModal

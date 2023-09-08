@@ -1,15 +1,16 @@
-import InventoryOverview from "../components/InventoryOverview";
+import OverallInventory from "../components/OverallInventory";
+import NewProducts from "../components/NewProducts";
+import AddProduct from "../components/addProduct";
+import {useSelector} from "react-redux";
+import {selectShowProductModal} from "../stores/productSlice";
 
-const InventoryPage = ()=>{
-    return (
-        (<div className='w-full relative'>
-            <div className='flex flex-col gap-y-5'>
-                <div className=' flex flex-initial flex-col md:flex-row gap-5'>
-                    <InventoryOverview/>
-                </div>
-            </div>
-        </div>)
-    )
+const InventoryPage = () => {
+    const showProductModal = useSelector(selectShowProductModal)
+    return ((<div className='flex flex-col gap-y-5 w-full'>
+            <OverallInventory/>
+            <NewProducts/>
+            {showProductModal && (<AddProduct/>)}
+        </div>))
 }
 
 export default InventoryPage

@@ -9,9 +9,11 @@ import {Outlet} from "react-router-dom";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Logout from "../components/Logout";
 import Dropdown from "../components/Dropdown";
+import {selectShowProductModal} from "../stores/productSlice";
 const AdminLayout = () => {
     const { pharmacy_id } = useSelector(selectCurrentUser);
     const showDropdown = useSelector(selectShowDropdown)
+    const showProductModal = useSelector((selectShowProductModal))
     const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
 
     const productLoader = () => {
@@ -44,7 +46,7 @@ const AdminLayout = () => {
     }, [pharmacy_id]);
 
     return (
-        <div className='flex flex-col flex-initial layout'>
+        <div className={`flex flex-col flex-initial layout`}>
             <Navbar layout='panel'/>
             <div className='flex flex-row w-full relative'>
                 { showDropdown && <Dropdown/>}
@@ -53,7 +55,7 @@ const AdminLayout = () => {
                 </div>
                 <div className=' flex flex-col gap-y-2 basis-10/12 bg-slate-100' >
                     <Breadcrumbs/>
-                    <div className='layoutWidth p-3'>
+                    <div className='p-3'>
                         <Outlet/>
                     </div>
                 </div>
