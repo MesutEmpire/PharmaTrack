@@ -29,7 +29,7 @@ import IconCustomers from "../icons/IconCustomers";
 export const navlinks = [
   {
     tag: "Dashboard",
-    link: "/admin/dashboard",
+    link: "/admin/",
     icon: IconDashboard,
   },
   {

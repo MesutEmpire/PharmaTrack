@@ -1,6 +1,7 @@
 import {setShowProductModal} from "../stores/productSlice";
 import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
 import {useDispatch} from "react-redux";
+import {Link} from "react-router-dom";
 
 const NewProducts = () => {
     const dispatch: ThunkDispatch<any, any, AnyAction> = useDispatch();
@@ -80,25 +81,26 @@ const NewProducts = () => {
                 <tbody>
                 {products.map((product: any, index: number) => {
                     return (<tr key={index}  className="bg-white border-t hover:bg-gray-50"
-                    >
-                            <td className="px-6 py-4">{product.name}</td>
-                            <td className="px-6 py-4" >{product.buying_price}</td>
-                            <td className="px-6 py-4" >{product.quantity}</td>
-                            <td className="px-6 py-4" >{product.threshold_value}</td>
-                            <td className="px-6 py-4" >{product.expiry_date.toLocaleString().split(',')[0]}</td>
-                            <td className="px-6 py-4" >
-                                <div className={`w - full bg-gray-100 rounded-full h-1.5 ${product.availability >= 75 ? 'bg-green-200/50' : product.availability >= 50 ? 'bg-blue-200/50' : product.availability >= 25 ? 'bg-orange-200/50' : 'bg-red-200/50'}`}>
-                                    <div className={`h-full relative rounded-full ${product.availability >= 75 ? 'bg-green-600' : product.availability >= 50 ? 'bg-blue-600' : product.availability >= 25 ? 'bg-orange-400' : 'bg-red-600'}`}
-                                    style={{width:`${product.availability}%`}}
-                                    ></div>
-                                </div>
-                            </td>
-                        <td className={`px-6 py-4`} >
+                            >
+                                <td className="px-6 py-4"><Link to={`${index}/`}>{product.name}</Link></td>
+                                <td className="px-6 py-4" >{product.buying_price}</td>
+                                <td className="px-6 py-4" >{product.quantity}</td>
+                                <td className="px-6 py-4" >{product.threshold_value}</td>
+                                <td className="px-6 py-4" >{product.expiry_date.toLocaleString().split(',')[0]}</td>
+                                <td className="px-6 py-4" >
+                                    <div className={`w - full bg-gray-100 rounded-full h-1.5 ${product.availability >= 75 ? 'bg-green-200/50' : product.availability >= 50 ? 'bg-blue-200/50' : product.availability >= 25 ? 'bg-orange-200/50' : 'bg-red-200/50'}`}>
+                                        <div className={`h-full relative rounded-full ${product.availability >= 75 ? 'bg-green-600' : product.availability >= 50 ? 'bg-blue-600' : product.availability >= 25 ? 'bg-orange-400' : 'bg-red-600'}`}
+                                             style={{width:`${product.availability}%`}}
+                                        ></div>
+                                    </div>
+                                </td>
+                                <td className={`px-6 py-4`} >
                             <span className={`p-2 rounded-full ${ product.condition === 'Good' ? 'bg-green-50 border border-green-600 text-green-600': product.condition === 'Expired' ? 'bg-red-50  border border-red-600 text-red-600' :'bg-orange-50  border border-orange-600 text-orange-600'}`}>
                                 {product.condition}
                             </span>
-                            </td>
-                        </tr>)
+                                </td>
+                            </tr>
+                        )
                 })}
 
                 </tbody>

@@ -24,6 +24,8 @@ import SignUpPage from "../pages/SignUpPage";
 import AdminLayout from "../layouts/AdminLayout";
 import DashboardPage from "../pages/DashboardPage";
 import InventoryPage from "../pages/InventoryPage";
+import InventoryProduct from "../pages/InventoryProduct";
+import ProductDetails from "../components/ProductDetails";
 
 const router = createBrowserRouter([
   // {
@@ -76,8 +78,7 @@ const router = createBrowserRouter([
     },
     children: [
       {
-        // index: true,
-        path:'dashboard',
+        index: true,
         element: <DashboardPage/>,
         handle: {
           crumb: () => "Dashboard"
@@ -90,6 +91,32 @@ const router = createBrowserRouter([
         handle: {
           crumb: () => "Inventory"
         },
+      },
+      {
+        // index: true,
+        path:'inventory/:id',
+        element: <InventoryProduct/>,
+        handle: {
+          crumb: () => "Inventory Product"
+        },
+        children:[
+          {
+            index:true,
+            element: <ProductDetails/>
+          },
+          {
+            path: 'purchase',
+            element: <ProductDetails/>
+          },
+          {
+            path: 'adjustment',
+            element: <ProductDetails/>
+          },
+          {
+            path: 'history',
+            element: <ProductDetails/>
+          }
+        ]
       },
       {
         path: "products",

@@ -6,6 +6,7 @@ import UsersSummary from "../components/UsersSummary";
 import LineChart from "../components/LineChart";
 import {useSelector} from "react-redux";
 import {selectSales} from "../stores/saleSlice";
+import ProductOverview from "../components/ProductOverview";
 
 
 const DashboardPage = () => {
@@ -199,7 +200,7 @@ const DashboardPage = () => {
             </div>
             <div className=' flex flex-initial flex-col md:flex-row gap-5'>
                 <InventorySummary/>
-                <ProductDetails/>
+                <ProductOverview/>
                 <UsersSummary/>
             </div>
             <LineChart sales={test}/>
