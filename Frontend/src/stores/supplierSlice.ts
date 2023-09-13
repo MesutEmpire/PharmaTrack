@@ -11,6 +11,7 @@ const supplierSlice = createSlice({
     searchedSupplier: null,
     foundSearchSuppliers: [],
     supplierAddProduct: [],
+    showSupplierModal: false,
   },
   reducers: {
     setSuppliers: (state, action) => {
@@ -39,6 +40,9 @@ const supplierSlice = createSlice({
     setAddSuppplierProduct: (state, action) => {
       state.supplierAddProduct = action.payload;
     },
+    setShowSupplierModal: (state, action) => {
+      state.showSupplierModal = action.payload;
+    },
   },
 });
 
@@ -50,6 +54,7 @@ export const {
   setSuppliers,
   setErrorSuppliers,
   setSearchedSupplier,
+  setShowSupplierModal,
 } = supplierSlice.actions;
 export const selectSupplier = (state: RootState) => {
   if (state.supplier.searchedSupplier) {
@@ -67,3 +72,5 @@ export const selectErrorSupplierPost = (state: RootState) =>
 
 export const selectSupplierAddProduct = (state: RootState) =>
   state.supplier.supplierAddProduct;
+export const selectShowSupplierModal = (state: RootState) =>
+  state.supplier.showSupplierModal;

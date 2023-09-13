@@ -42,7 +42,7 @@ const Login = () => {
                 localStorage.setItem("currentUser", JSON.stringify(data));
                 dispatch(setCurrentUser(data));
                 dispatch(setErrorLogin(null));
-                return navigate("/admin/dashboard");
+                return navigate("/admin/");
               })
               .catch((error: any) => {
                 dispatch(setErrorLogin(error.message));

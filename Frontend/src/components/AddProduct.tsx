@@ -305,7 +305,7 @@ const AddProduct = () => {
       });
   };
 
-    return (<div className='card min-w-[30rem] absolute top-3.5 left-[40%] z-50'>
+    return (<div className='card min-w-[30rem] absolute top-3.5 left-[40%] z-50 shadow-lg'>
             <div className='flex flex-row justify-between w-full relative'>
                 <h3 className='text-lg font-semibold'>New Product</h3>
                 <button onClick={() => {

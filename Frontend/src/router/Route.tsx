@@ -1,10 +1,9 @@
-import {createBrowserRouter, redirect} from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import HomeLayout from "../layouts/HomeLayout";
 import ErrorComponent from "../components/ErrorComponent";
 import Dashboard from "../components/Dashboard";
 import Product from "../components/Product";
 import Suppliers from "../components/Suppliers";
-import Orders from "../components/Orders";
 import Sales from "../components/Sales";
 import Users from "../components/Users";
 import LandingLayout from "../layouts/LandingLayout";
@@ -12,7 +11,7 @@ import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import AddSupplier from "../components/AddSupplier";
 import SupplierLayout from "../layouts/SupplierLayout";
-import AddProduct from "../components/addProduct";
+import AddProduct from "../components/AddProduct";
 import ProductLayout from "../layouts/ProductLayout";
 import ForgotPassword from "../components/ForgotPassword";
 import ResetPassword from "../components/ResetPassword";
@@ -26,6 +25,11 @@ import DashboardPage from "../pages/DashboardPage";
 import InventoryPage from "../pages/InventoryPage";
 import InventoryProduct from "../pages/InventoryProduct";
 import ProductDetails from "../components/ProductDetails";
+import SuppliersPage from "../pages/SuppliersPage";
+import PurchasesPage from "../pages/PurchasesPage";
+import SalesPage from "../pages/SalesPage";
+import InvoicePage from "../pages/InvoicePage";
+import UsersPage from "../pages/Users";
 
 const router = createBrowserRouter([
   // {
@@ -37,34 +41,34 @@ const router = createBrowserRouter([
     path: "/",
     element: <NewHomeLayout />,
     errorElement: <ErrorComponent />,
-    children:[
+    children: [
       {
         index: true,
         element: <HomePage />,
-      }
-    ]
+      },
+    ],
   },
   {
-        path: "/sign_in",
-        element: <SignInPage />,
+    path: "/sign_in",
+    element: <SignInPage />,
     loader: () => {
       if (localStorage.getItem("currentUser")) {
-        return redirect("/admin");
+        return redirect("/admin/");
       } else {
         return null;
       }
-    }
+    },
   },
   {
-        path: "/sign_up",
-        element: <SignUpPage />,
+    path: "/sign_up",
+    element: <SignUpPage />,
     loader: () => {
       if (localStorage.getItem("currentUser")) {
-        return redirect("/admin/dashboard");
+        return redirect("/admin/");
       } else {
         return null;
       }
-    }
+    },
   },
   {
     path: "/admin",
@@ -79,50 +83,48 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <DashboardPage/>,
+        element: <DashboardPage />,
         handle: {
-          crumb: () => "Dashboard"
+          crumb: () => "Dashboard",
         },
       },
       {
-        // index: true,
-        path:'inventory',
-        element: <InventoryPage/>,
+        path: "inventory",
+        element: <InventoryPage />,
         handle: {
-          crumb: () => "Inventory"
+          crumb: () => "Inventory",
         },
       },
       {
-        // index: true,
-        path:'inventory/:id',
-        element: <InventoryProduct/>,
+        path: "inventory/:id",
+        element: <InventoryProduct />,
         handle: {
-          crumb: () => "Inventory Product"
+          crumb: () => "Inventory Product",
         },
-        children:[
+        children: [
           {
-            index:true,
-            element: <ProductDetails/>
+            index: true,
+            element: <ProductDetails />,
           },
           {
-            path: 'purchase',
-            element: <ProductDetails/>
+            path: "purchase",
+            element: <ProductDetails />,
           },
           {
-            path: 'adjustment',
-            element: <ProductDetails/>
+            path: "adjustment",
+            element: <ProductDetails />,
           },
           {
-            path: 'history',
-            element: <ProductDetails/>
-          }
-        ]
+            path: "history",
+            element: <ProductDetails />,
+          },
+        ],
       },
       {
         path: "products",
         element: <ProductLayout />,
         handle: {
-          crumb: () => "Products"
+          crumb: () => "Products",
         },
         children: [
           {
@@ -133,50 +135,44 @@ const router = createBrowserRouter([
             path: "addNewProduct",
             element: <AddProduct />,
             handle: {
-              crumb: () => "Add New Product"
+              crumb: () => "Add New Product",
             },
           },
         ],
       },
       {
         path: "suppliers",
-        element: <SupplierLayout />,
+        element: <SuppliersPage />,
         handle: {
-          crumb: () => "Suppliers"
+          crumb: () => "Suppliers",
         },
-        children: [
-          {
-            index: true,
-            element: <Suppliers />,
-          },
-          {
-            path: "addNewSupplier",
-            element: <AddSupplier />,
-            handle: {
-              crumb: () => "Add New Supplier"
-            },
-          },
-        ],
       },
       {
-        path: "orders",
-        element: <Orders />,
+        path: "purchases",
+        element: <PurchasesPage />,
         handle: {
-          crumb: () => "Orders"
+          crumb: () => "Purchases",
         },
       },
       {
         path: "sales",
-        element: <Sales />,
+        element: <SalesPage />,
         handle: {
-          crumb: () => "Sales"
+          crumb: () => "Sales",
+        },
+      },
+      {
+        path: "invoice",
+        element: <InvoicePage />,
+        handle: {
+          crumb: () => "Invoices",
         },
       },
       {
         path: "users",
-        element: <Users />,
+        element: <UsersPage />,
         handle: {
-          crumb: () => "Users"
+          crumb: () => "Users",
         },
       },
     ],
@@ -187,11 +183,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/forgot_password",
-    element: <ForgotPassword />
+    element: <ForgotPassword />,
   },
   {
     path: "/reset_password/:data_id",
-    element: <ResetPassword />
+    element: <ResetPassword />,
   },
   // {
   //   path: "/admin",

@@ -4,7 +4,7 @@ import { selectOrder, setSearchedOrder } from "../stores/orderSlice";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 import IconAddOrder from "../icons/IconAddOrder";
-const Orders = () => {
+const Purchases = () => {
   const { orders, error } = useSelector(selectOrder);
 
   return (
@@ -90,4 +90,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default Purchases;

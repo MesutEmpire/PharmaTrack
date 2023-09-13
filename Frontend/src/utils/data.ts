@@ -39,42 +39,42 @@ export const navlinks = [
   },
   {
     tag : "Purchase",
-    link:"/admin/suppliers",
+    link:"/admin/purchases",
     icon: IconPurchase
   },
-  {
-    tag: "Suppliers Return",
-    link: "/admin/orders",
-    icon: IconReturn,
-  },
+  // {
+  //   tag: "Suppliers Return",
+  //   link: "/admin/orders",
+  //   icon: IconReturn,
+  // },
   {
     tag: "Invoice",
-    link: "/admin/sales",
+    link: "/admin/invoice",
     icon: IconInvoice,
   },
   {
     tag: "Sales",
-    link: "/admin/users",
+    link: "/admin/sales",
     icon: IconSale,
   },
+  // {
+  //   tag: "Purchase",
+  //   link: "/admin/suppliers",
+  //   icon: IconSupplier,
+  // },
+  // {
+  //   tag: "Bill",
+  //   link: "/admin/users",
+  //   icon: IconBill,
+  // },
   {
-    tag: "Purchase",
-    link: "/admin/suppliers",
-    icon: IconSupplier,
-  },
-  {
-    tag: "Bill",
-    link: "/admin/users",
-    icon: IconBill,
-  },
-  {
-    tag: "Customers",
+    tag: "Admins",
     link: "/admin/users",
     icon: IconCustomers,
   },
   {
     tag: "Suppliers",
-    link: "/admin/users",
+    link: "/admin/suppliers",
     icon: IconSupplier,
   },
 ];
